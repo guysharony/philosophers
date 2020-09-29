@@ -9,13 +9,13 @@ int     err(char *str) {
 
 int     msg(t_philos *philo, char *str)
 {
-    pthread_mutex_lock(&philo->params->write);
+    sem_wait(philo->params->write);
     ft_putnbr(ft_time() - philo->params->start);
     write(1, " ", 1);
     ft_putnbr(philo->id);
     write(1, " ", 1);
     ft_putstr(str);
     write(1, "\n", 1);
-    pthread_mutex_unlock(&philo->params->write);
+    sem_post(philo->params->write);
     return (0);
 }

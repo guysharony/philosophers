@@ -1,4 +1,4 @@
-#include "../includes/philosophers.h"
+#include "../includes/philo_one.h"
 
 void        forks1(t_philos *tmp)
 {

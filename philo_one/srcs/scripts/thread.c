@@ -1,26 +1,9 @@
-#include "../includes/philosophers.h"
-
-void        *sthr(void *philo)
-{
-    t_philos    *tmp;
-
-    tmp = (t_philos*)philo;
-    while (1)
-    {
-        if (tmp->params->nb_eat_philo != -1)
-            if (tmp->ceat >= tmp->params->nb_eat_philo)
-                tmp->params->nw_eat--;
-        aeat(tmp);
-        asleep(tmp);
-        athink(tmp);
-    }
-    return (NULL);
-}
+#include "../includes/philo_one.h"
 
 int         monitor(t_philo_one *philo_one)
 {
-    int         i;
-    long long   t;
+    size_t      i;
+    size_t      t;
 
     while (1)
     {
@@ -42,9 +25,26 @@ int         monitor(t_philo_one *philo_one)
     }
 }
 
+void        *sthr(void *philo)
+{
+    t_philos    *tmp;
+
+    tmp = (t_philos*)philo;
+    while (1)
+    {
+        if (tmp->params->nb_eat_philo != -1)
+            if (tmp->ceat >= tmp->params->nb_eat_philo)
+                tmp->params->nw_eat--;
+        aeat(tmp);
+        asleep(tmp);
+        athink(tmp);
+    }
+    return (NULL);
+}
+
 int         thr(t_philo_one *philo_one)
 {
-    int         i;
+    size_t  i;
 
     i = 0;
     philo_one->params->start = ft_time();
@@ -52,7 +52,7 @@ int         thr(t_philo_one *philo_one)
     {
         philo_one->philo[i]->last = philo_one->params->start;
         if (pthread_create(&philo_one->philo[i]->thread, NULL, sthr, philo_one->philo[i]))
-            return (err("Can't start threading."));
+            return (err("A problem with pthread_create() in \'thread.c\'.", 0));
         pthread_detach(philo_one->philo[i]->thread);
         usleep(100);
         i++;

@@ -4,6 +4,7 @@
  #include <unistd.h>
  #include <stdio.h>
  #include <pthread.h>
+ #include <semaphore.h>
  #include "utils.h"
  
  typedef struct             s_params
@@ -14,9 +15,10 @@
     int                     tm_to_sleep;
     int                     nb_eat_philo;
     int                     nw_eat;
+    int                     end;
     long long               start;
-    pthread_mutex_t         write;
-    pthread_mutex_t         *fork;
+    sem_t                   *write;
+    sem_t                   *fork;
  }                          t_params;
 
  typedef struct             s_philos
@@ -27,7 +29,8 @@
     int                     eat;
     int                     ceat;
     long long               last;
-    pthread_t               thread;
+    pid_t                   proc;
+    pthread_t               monitor;
     t_params                *params;
  }                          t_philos;
 
