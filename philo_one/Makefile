@@ -1,5 +1,5 @@
 CC			= gcc
-FLAGS		= -Werror -Wextra -Wall -pthread
+FLAGS		= -Werror -Wextra -Wall
 
 SRCS 		= srcs/
 
