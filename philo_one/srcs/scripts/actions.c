@@ -2,16 +2,16 @@
 
 void        forks1(t_philos *tmp)
 {
-    pthread_mutex_lock(&tmp->params->fork[tmp->rfork - 1]);
+    pthread_mutex_lock(tmp->params->fork[tmp->rfork - 1]);
     msg(tmp, "has taken a fork.");
-    pthread_mutex_lock(&tmp->params->fork[tmp->lfork - 1]);
+    pthread_mutex_lock(tmp->params->fork[tmp->lfork - 1]);
     msg(tmp, "has taken a fork.");
 }
 
 void        forks0(t_philos *tmp)
 {
-    pthread_mutex_unlock(&tmp->params->fork[tmp->rfork - 1]);
-    pthread_mutex_unlock(&tmp->params->fork[tmp->lfork - 1]);
+    pthread_mutex_unlock(tmp->params->fork[tmp->rfork - 1]);
+    pthread_mutex_unlock(tmp->params->fork[tmp->lfork - 1]);
 }
 
 void        aeat(t_philos *tmp)

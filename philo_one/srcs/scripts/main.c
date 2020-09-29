@@ -11,11 +11,11 @@ int     clean(t_philo_one *philo_one)
     {
         philo_one->philo[i]->params = NULL;
         free(philo_one->philo[i]);
-        pthread_mutex_destroy(&philo_one->params->fork[i]);
+        pthread_mutex_destroy(philo_one->params->fork[i]);
         i++;
     }
     free(philo_one->philo);
-    pthread_mutex_destroy(&philo_one->params->write);
+    pthread_mutex_destroy(philo_one->params->write);
     free(philo_one);
     return (1);
 }
