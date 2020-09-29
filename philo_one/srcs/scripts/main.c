@@ -9,6 +9,7 @@ int     clean(t_philo_one *philo_one)
     j = philo_one->params->nb_of_philosophers;
     while (i < j)
     {
+	pthread_join(philo_one->philo[i]->thread, NULL);
 	free(philo_one->philo[i]);
 	free(philo_one->params->fork[i]);
         i++;

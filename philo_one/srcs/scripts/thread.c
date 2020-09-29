@@ -39,6 +39,7 @@ void        *sthr(void *philo)
         asleep(tmp);
         athink(tmp);
     }
+    free(philo);
     return (NULL);
 }
 
