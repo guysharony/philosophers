@@ -39,6 +39,8 @@ int             init_philos(t_philo_one *philo_one, int size)
         philo_one->philo[i]->lfork = ((i + 1) % size) + 1;
         philo_one->philo[i]->params = philo_one->params;
         philo_one->philo[i]->ceat = 0;
+	philo_one->philo[i]->last = 0;
+	philo_one->philo[i]->eat = 0;
         i++;
     }
     return (0);
