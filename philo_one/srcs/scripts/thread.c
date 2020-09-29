@@ -51,7 +51,7 @@ int         thr(t_philo_one *philo_one)
     while (i < philo_one->params->nb_of_philosophers)
     {
         philo_one->philo[i]->last = philo_one->params->start;
-        if (pthread_create(&philo_one->philo[i]->thread, NULL, sthr, philo_one->philo[i]))
+        if (pthread_create(&philo_one->philo[i]->thread, NULL, &sthr, philo_one->philo[i]))
             return (err("A problem with pthread_create() in \'thread.c\'.", 0));
         pthread_detach(philo_one->philo[i]->thread);
         usleep(100);

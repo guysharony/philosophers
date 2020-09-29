@@ -2,15 +2,21 @@
 
 int     clean(t_philo_one *philo_one)
 {
-    size_t  i;
-    size_t  j;
+    size_t	i;
+    size_t	j;
 
     i = 0;
     j = philo_one->params->nb_of_philosophers;
     while (i < j)
     {
-	    i++;
+	free(philo_one->philo[i]);
+	free(philo_one->params->fork[i]);
+        i++;
     }
+    free(philo_one->params->write);
+    free(philo_one->params->fork);
+    free(philo_one->params);
+    free(philo_one->philo);
     free(philo_one);
     return (1);
 }
@@ -35,8 +41,9 @@ int     main(int argc, char **argv)
     if (args(argc, argv))
         return (1);
     if ((philo_one = init(argc, argv)) == NULL)
-        return (clean(philo_one) && err("A problem occured during malloc.", 0));
+        return (err("A problem occured during malloc.", 0));
     if (thr(philo_one))
         return (1);
+    clean(philo_one);
     return (0);
 }
