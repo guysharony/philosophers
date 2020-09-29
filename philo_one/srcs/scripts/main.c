@@ -1,5 +1,25 @@
 #include "../includes/philo_one.h"
 
+int     clean(t_philo_one *philo_one)
+{
+    size_t  i;
+    size_t  j;
+
+    i = 0;
+    j = philo_one->params->nb_of_philosophers;
+    while (i < j)
+    {
+        philo_one->philo[i]->params = NULL;
+        free(philo_one->philo[i]);
+        pthread_mutex_destroy(&philo_one->params->fork[i]);
+        i++;
+    }
+    free(philo_one->philo);
+    pthread_mutex_destroy(&philo_one->params->write);
+    free(philo_one);
+    return (1);
+}
+
 int     args(int argc, char **argv)
 {
     if (argc < 5)
@@ -20,7 +40,7 @@ int     main(int argc, char **argv)
     if (args(argc, argv))
         return (1);
     if ((philo_one = init(argc, argv)) == NULL)
-        return (err("A problem occured during malloc.", 0));
+        return (clean(philo_one) && err("A problem occured during malloc.", 0));
     if (thr(philo_one))
         return (1);
     return (0);

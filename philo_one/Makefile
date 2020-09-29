@@ -1,5 +1,5 @@
 CC			= gcc
-FLAGS		= -Wall -Werror -Wextra
+FLAGS		= -fsanitize=address -g3
 
 SRCS 		= srcs/
 
