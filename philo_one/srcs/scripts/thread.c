@@ -14,6 +14,7 @@ int         monitor(t_philo_one *philo_one)
             if ((philo_one->params->nb_eat_philo != -1 && philo_one->params->nw_eat <= 0) ||
             (philo_one->philo[i]->eat == 0 && (philo_one->philo[i]->last + philo_one->params->tm_to_die < t)))
             {
+                philo_one->params->end = 1;
                 if (philo_one->philo[i]->last + philo_one->params->tm_to_die < t)
                     msg(philo_one->philo[i], "is dead.");
                 pthread_mutex_lock(philo_one->params->write);
@@ -30,7 +31,7 @@ void        *sthr(void *philo)
     t_philos    *tmp;
 
     tmp = (t_philos*)philo;
-    while (1)
+    while (tmp->params->end != 1)
     {
         if (tmp->params->nb_eat_philo != -1)
             if (tmp->ceat >= tmp->params->nb_eat_philo)

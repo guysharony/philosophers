@@ -14,6 +14,7 @@
      size_t                 tm_to_sleep;
      size_t                 nb_eat_philo;
      size_t                 nw_eat;
+     int                    end;
      size_t                 start;
      pthread_mutex_t        *write;
      pthread_mutex_t        **fork;
