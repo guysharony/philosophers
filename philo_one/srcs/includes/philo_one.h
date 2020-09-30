@@ -26,6 +26,7 @@
      size_t                 lfork;
      size_t                 rfork;
      int                    eat;
+     int                    stop;
      size_t                 ceat;
      size_t                 last;
      pthread_t              thread;

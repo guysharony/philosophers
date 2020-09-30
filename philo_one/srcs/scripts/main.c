@@ -9,9 +9,8 @@ int     clean(t_philo_one *philo_one)
     j = philo_one->params->nb_of_philosophers;
     while (i < j)
     {
-	pthread_join(philo_one->philo[i]->thread, NULL);
-	free(philo_one->philo[i]);
-	free(philo_one->params->fork[i]);
+        free(philo_one->philo[i]);
+        free(philo_one->params->fork[i]);
         i++;
     }
     free(philo_one->params->write);
@@ -45,6 +44,5 @@ int     main(int argc, char **argv)
         return (err("A problem occured during malloc.", 0));
     if (thr(philo_one))
         return (1);
-    clean(philo_one);
     return (0);
 }
