@@ -25,7 +25,7 @@ void        *sthr(void *philo)
     pthread_t   thread;
 
     tmp = (t_philos*)philo;
-    if (pthread_create(&thread, NULL, &monitor, tmp) != 0) 
+    if (pthread_create(&thread, NULL, &monitor, &tmp) != 0) 
         return (NULL);
     pthread_detach(thread);
     while (!tmp->params->end)
@@ -39,16 +39,17 @@ void        *sthr(void *philo)
 
 int         thr(t_philo_one *philo_one)
 {
-    size_t  i;
+    size_t      i;
+    pthread_t   tmp[philo_one->params->nb_of_philosophers];
 
     i = 0;
     philo_one->params->start = ft_time();
     while (i < philo_one->params->nb_of_philosophers)
     {
         philo_one->philo[i]->last = philo_one->params->start;
-        if (pthread_create(&philo_one->philo[i]->thread, NULL, &sthr, philo_one->philo[i]))
+        if (pthread_create(&tmp[i], NULL, &sthr, philo_one->philo[i]))
             return (err("A problem with pthread_create() in \'thread.c\'.", 0));
-        pthread_detach(philo_one->philo[i]->thread);
+        pthread_detach(tmp[i]);
         usleep(100);
         i++;
     }
