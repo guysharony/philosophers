@@ -1,34 +1,11 @@
 #include "../includes/philo_one.h"
 
-void        *monitor(void *philo)
-{
-    t_philos    *tmp;
-    size_t      time;
-
-    tmp = (t_philos*)philo;
-    while (1)
-    {
-        time = ft_time();
-        if (tmp->last + tmp->params->tm_to_die < time)
-        {
-            tmp->params->end = 1;
-            msg(tmp, "is dead.");
-            return (NULL);
-        }
-    }
-    return (NULL);
-}
-
 void        *sthr(void *philo)
 {
     t_philos    *tmp;
-    pthread_t   thread;
 
     tmp = (t_philos*)philo;
-    if (pthread_create(&thread, NULL, &monitor, tmp) != 0) 
-        return (NULL);
-    pthread_detach(thread);
-    while (!tmp->params->end)
+    while (tmp->ceat < tmp->params->nb_eat_philo)
     {
         aeat(tmp);
         asleep(tmp);
@@ -40,6 +17,7 @@ void        *sthr(void *philo)
 int         thr(t_philo_one *philo_one)
 {
     size_t      i;
+    size_t      t;
     pthread_t   tid;
 
     i = 0;
@@ -55,8 +33,19 @@ int         thr(t_philo_one *philo_one)
     }
     while (1)
     {
-        if (philo_one->params->end)
-            break;
+        i = 0;
+        while (i < philo_one->params->nb_of_philosophers)
+        {
+            t = ft_time();
+            if (philo_one->philo[i]->last + philo_one->params->tm_to_die < t)
+            {
+                msg(philo_one->philo[i], "is dead.");
+                pthread_mutex_lock(philo_one->params->write);
+                return (0);
+            }
+            i++;
+        }
+        usleep(1000);
     }
     return (0);
 }
