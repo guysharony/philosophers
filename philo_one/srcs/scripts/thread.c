@@ -18,6 +18,8 @@ void        *monitor(void *philo)
             {
                 msg(tmp, "is dead.");
                 pthread_mutex_lock(tmp->params->write);
+                tmp->params->nw_eat = 0;
+                return (NULL);
             }
             tmp->stop = 1;
             tmp->params->nw_eat--;
