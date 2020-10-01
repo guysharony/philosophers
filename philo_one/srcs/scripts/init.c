@@ -11,6 +11,7 @@ int             init_options(t_philo_one *tmp, int argc, char **argv)
     tmp->params->tm_to_die = ft_atoi(argv[2]);
     tmp->params->tm_to_eat = ft_atoi(argv[3]);
     tmp->params->tm_to_sleep = ft_atoi(argv[4]);
+    tmp->params->end = 0;
     if (!(tmp->params->write = malloc(sizeof(pthread_mutex_t))))
         return (1);
     pthread_mutex_init(tmp->params->write, NULL);
@@ -39,8 +40,9 @@ int             init_philos(t_philo_one *philo_one, int size)
         philo_one->philo[i]->lfork = ((i + 1) % size) + 1;
         philo_one->philo[i]->params = philo_one->params;
         philo_one->philo[i]->ceat = 0;
-	philo_one->philo[i]->last = 0;
-	philo_one->philo[i]->eat = 0;
+        philo_one->philo[i]->last = 0;
+        philo_one->philo[i]->eat = 0;
+        philo_one->philo[i]->stop = 0;
         i++;
     }
     return (0);
