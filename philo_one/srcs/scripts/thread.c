@@ -16,7 +16,7 @@ int         monitor(t_philo_one *philo_one)
             {
                 if (philo_one->philo[i]->last + philo_one->params->tm_to_die < t)
                     msg(philo_one->philo[i], "is dead.");
-                pthread_mutex_lock(&philo_one->params->write);
+                pthread_mutex_lock(philo_one->params->write);
                 return (0);
             }
             i++;

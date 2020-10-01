@@ -15,8 +15,8 @@
      size_t                 nb_eat_philo;
      size_t                 nw_eat;
      size_t                 start;
-     pthread_mutex_t        write;
-     pthread_mutex_t        *fork;
+     pthread_mutex_t        *write;
+     pthread_mutex_t        **fork;
  }                          t_params;
 
  typedef struct             s_philos
