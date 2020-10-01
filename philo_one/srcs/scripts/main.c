@@ -1,26 +1,5 @@
 #include "../includes/philo_one.h"
 
-int     clean(t_philo_one *philo_one)
-{
-    size_t	i;
-    size_t	j;
-
-    i = 0;
-    j = philo_one->params->nb_of_philosophers;
-    while (i < j)
-    {
-        free(philo_one->philo[i]);
-        free(philo_one->params->fork[i]);
-        i++;
-    }
-    free(philo_one->params->write);
-    free(philo_one->params->fork);
-    free(philo_one->params);
-    free(philo_one->philo);
-    free(philo_one);
-    return (1);
-}
-
 int     args(int argc, char **argv)
 {
     if (argc < 5)

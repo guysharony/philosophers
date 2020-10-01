@@ -1,5 +1,30 @@
 #include "../includes/philo_one.h"
 
+int         monitor(t_philo_one *philo_one)
+{
+    size_t      i;
+    size_t      t;
+
+    while (1)
+    {
+        i = 0;
+        while (i < philo_one->params->nb_of_philosophers)
+        {
+            t = ft_time();
+            if ((philo_one->params->nb_eat_philo != -1 && philo_one->params->nw_eat <= 0) ||
+            (philo_one->philo[i]->eat == 0 && (philo_one->philo[i]->last + philo_one->params->tm_to_die < t)))
+            {
+                if (philo_one->philo[i]->last + philo_one->params->tm_to_die < t)
+                    msg(philo_one->philo[i], "is dead.");
+                pthread_mutex_lock(&philo_one->params->write);
+                return (0);
+            }
+            i++;
+        }
+        usleep(1000);
+    }
+}
+
 void        *sthr(void *philo)
 {
     t_philos    *tmp;
@@ -7,8 +32,10 @@ void        *sthr(void *philo)
     tmp = (t_philos*)philo;
     while (1)
     {
-        if (aeat(tmp))
-            return (NULL);
+        if (tmp->params->nb_eat_philo != -1)
+            if (tmp->ceat >= tmp->params->nb_eat_philo)
+                tmp->params->nw_eat--;
+        aeat(tmp);
         asleep(tmp);
         athink(tmp);
     }
@@ -17,38 +44,19 @@ void        *sthr(void *philo)
 
 int         thr(t_philo_one *philo_one)
 {
-    size_t      i;
-    size_t      t;
-    pthread_t   tid;
+    size_t  i;
 
     i = 0;
     philo_one->params->start = ft_time();
     while (i < philo_one->params->nb_of_philosophers)
     {
         philo_one->philo[i]->last = philo_one->params->start;
-        if (pthread_create(&tid, NULL, &sthr, philo_one->philo[i]))
+        if (pthread_create(&philo_one->philo[i]->thread, NULL, sthr, philo_one->philo[i]))
             return (err("A problem with pthread_create() in \'thread.c\'.", 0));
-        pthread_detach(tid);
+        pthread_detach(philo_one->philo[i]->thread);
         usleep(100);
         i++;
     }
-    while (1)
-    {
-        i = 0;
-        t = ft_time();
-        while (i < philo_one->params->nb_of_philosophers)
-        {
-            if (philo_one->params->nw_eat <= 0 ||
-            (philo_one->philo[i]->eat == 0 && (philo_one->philo[i]->last + philo_one->params->tm_to_die < t)))
-            {
-                if (philo_one->philo[i]->last + philo_one->params->tm_to_die < t)
-                    msg(philo_one->philo[i], "is dead.");
-                philo_one->params->nw_eat = 0;
-                usleep(1000);
-                return (0);
-            }
-            i++;
-        }
-    }
+    monitor(philo_one);
     return (0);
 }
