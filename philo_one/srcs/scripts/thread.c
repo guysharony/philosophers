@@ -5,11 +5,25 @@ void        *sthr(void *philo)
     t_philos    *tmp;
 
     tmp = (t_philos*)philo;
-    while (tmp->ceat < tmp->params->nb_eat_philo)
+    while (1)
     {
-        aeat(tmp);
-        asleep(tmp);
-        athink(tmp);
+      	pthread_mutex_lock(tmp->params->fork[tmp->rfork - 1]);
+	msg(tmp, "has taken a fork.");
+	pthread_mutex_lock(tmp->params->fork[tmp->lfork - 1]);
+	msg(tmp, "has taken a fork.");
+	msg(tmp, "is eating.");
+	usleep(tmp->params->tm_to_eat * 1000);
+	tmp->ceat++;
+	pthread_mutex_unlock(tmp->params->fork[tmp->rfork - 1]);
+	pthread_mutex_unlock(tmp->params->fork[tmp->lfork - 1]);
+	if (tmp->ceat >= tmp->params->nb_eat_philo)
+	{
+		tmp->params->nw_eat--;
+		return (NULL);
+	}
+	msg(tmp, "is sleeping.");
+	usleep(tmp->params->tm_to_sleep * 1000);
+	msg(tmp, "is thinking.");
     }
     return (NULL);
 }
@@ -33,19 +47,12 @@ int         thr(t_philo_one *philo_one)
     }
     while (1)
     {
-        i = 0;
-        while (i < philo_one->params->nb_of_philosophers)
-        {
-            t = ft_time();
-            if (philo_one->philo[i]->last + philo_one->params->tm_to_die < t)
-            {
-                msg(philo_one->philo[i], "is dead.");
-                pthread_mutex_lock(philo_one->params->write);
-                return (0);
-            }
-            i++;
-        }
-        usleep(1000);
+	if (philo_one->params->nw_eat <= 0)
+	{
+		usleep(1000);
+		return (0);
+	}
+	usleep(1000);
     }
     return (0);
 }
