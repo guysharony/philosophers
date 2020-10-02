@@ -4,6 +4,7 @@
  #include <pthread.h>
  #include <stdlib.h>
  #include <semaphore.h>
+ #include <fcntl.h>
  #include <sys/time.h>
 
  typedef struct             s_params
