@@ -1,13 +1,24 @@
 #include "../includes/philo_one.h"
 
+void        fork1(t_philos *philo)
+{
+    pthread_mutex_lock(philo->rfork);
+    msg(philo, "has taken a fork.", 0);
+    pthread_mutex_lock(philo->lfork);
+    msg(philo, "has taken a fork.", 0);
+}
+
+void        fork0(t_philos *philo)
+{
+    pthread_mutex_unlock(philo->rfork);
+    pthread_mutex_unlock(philo->lfork);
+}
+
 int         eat(t_philos *tmp)
 {
     int     i;
 
-    pthread_mutex_lock(tmp->rfork);
-    msg(tmp, "has taken a fork.", 0);
-    pthread_mutex_lock(tmp->lfork);
-    msg(tmp, "has taken a fork.", 0);
+    fork1(tmp);
     if (!(i = msg(tmp, "is eating.", 0)))
     {
         tmp->eat = 1;
@@ -16,7 +27,6 @@ int         eat(t_philos *tmp)
         usleep(tmp->params->tm_to_eat * 1000);
         tmp->eat = 0;
     }
-    pthread_mutex_unlock(tmp->rfork);
-    pthread_mutex_unlock(tmp->lfork);
+    fork0(tmp);
     return (i);
 }
