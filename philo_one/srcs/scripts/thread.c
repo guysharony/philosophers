@@ -33,7 +33,6 @@ void        *monitor(void *philo)
             }
             return (NULL);
         }
-	usleep(1000);
     }
 }
 
@@ -69,14 +68,13 @@ int         thr(t_philo_one *philo_one)
         if (pthread_create(&tid, NULL, &sthr, philo_one->philo[i]))
             return (err("A problem with pthread_create() in \'thread.c\'.", 0));
         pthread_detach(tid);
-        usleep(10);
+        usleep(100);
         i++;
     }
     while (!philo_one->params->end)
     {
         if (philo_one->params->nw_eat <= 0)
             philo_one->params->end = 1;
-	usleep(1000);
     }
     return (0);
 }
