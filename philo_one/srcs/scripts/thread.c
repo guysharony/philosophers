@@ -33,6 +33,7 @@ void        *monitor(void *philo)
             }
             return (NULL);
         }
+	usleep(1000);
     }
 }
 
@@ -75,6 +76,7 @@ int         thr(t_philo_one *philo_one)
     {
         if (philo_one->params->nw_eat <= 0)
             philo_one->params->end = 1;
+	usleep(1000);
     }
     return (0);
 }
