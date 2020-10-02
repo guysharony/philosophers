@@ -11,12 +11,11 @@ void        *monitor(void *philo)
         time = ft_time();
         if (!tmp->eat && tmp->last + tmp->params->tm_to_die < time)
         {
-            msg(tmp, "is dead.");
-            pthread_mutex_lock(tmp->params->write);
+            msg(tmp, "is dead.", 1);
             tmp->params->nw_eat = 0;
             return (NULL);
         }
-        if (tmp->ceat >= tmp->params->nb_eat_philo)
+        if (tmp->params->end || tmp->ceat >= tmp->params->nb_eat_philo)
         {
             tmp->stop = 1;
             tmp->params->nw_eat--;
@@ -38,9 +37,9 @@ void        *sthr(void *philo)
     {
         if (eat(tmp))
             return (NULL);
-        if (!(msg(tmp, "is sleeping.")))
+        if (!(msg(tmp, "is sleeping.", 0)))
     	    usleep(tmp->params->tm_to_sleep * 1000);
-        msg(tmp, "is thinking.");
+        msg(tmp, "is thinking.", 0);
     }
     return (NULL);
 }

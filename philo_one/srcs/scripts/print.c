@@ -1,42 +1,5 @@
 #include "../includes/philo_one.h"
 
-size_t  ft_strlen(char *str)
-{
-    size_t  i;
-
-    i = 0;
-    while (str[i])
-        i++;
-    return (i);
-}
-
-void    ft_putstr(char *str)
-{
-    size_t  i;
-
-    i = 0;
-    while(str[i]) {
-        write(1, &str[i], 1);
-        i++;
-    }
-}
-
-void	ft_putnbr(size_t nb)
-{
-    char    c;
-
-	if (nb >= 10)
-	{
-		ft_putnbr(nb / 10);
-		ft_putnbr(nb % 10);
-	}
-	else
-    {
-        c = nb + '0';
-		write(1, &c, 1);
-    }
-}
-
 int     err(char *str, int help)
 {
     if (help >= 0 && help < 2)
@@ -72,7 +35,6 @@ size_t  ft_size(t_philos *philo, char *str, size_t time)
     n = 5;
     a = 0;
     id = philo->id;
-    time -= philo->params->start;
     while (time /= 10)
         n++;
     while (id /= 10)
@@ -101,32 +63,31 @@ void    get_number(char **dst, size_t nbr)
     }
 }
 
-int     msg(t_philos *philo, char *str)
+int     msg(t_philos *philo, char *str, int status)
 {
-    size_t  size;
     size_t  time;
+    size_t  size;
     char    *msg;
     char    *tmp;
 
-    if (philo->stop == 0)
-    {
-        pthread_mutex_lock(philo->params->write);
-        time = ft_time();
-        size = ft_size(philo, str, time);
-        if (!(msg = malloc(sizeof(char) * (size + 1))))
-            return (1);
-        tmp = msg;
-        get_number(&tmp, time - philo->params->start);
-        get_string(&tmp, " ");
-        get_number(&tmp, philo->id);
-        get_string(&tmp, " ");
-        get_string(&tmp, str);
-        get_string(&tmp, "\n");
-        *tmp = '\0';
-        write(1, msg, size);
-        free(msg);
+    if (philo->stop)
+        return (1);
+    time = ft_time() - philo->params->start;
+    size = ft_size(philo, str, time);
+    if (!(msg = malloc(sizeof(char) * (size + 1))))
+        return (1);
+    tmp = msg;
+    get_number(&tmp, time);
+    get_string(&tmp, " ");
+    get_number(&tmp, philo->id);
+    get_string(&tmp, " ");
+    get_string(&tmp, str);
+    get_string(&tmp, "\n");
+    *tmp = '\0';
+    pthread_mutex_lock(philo->params->write);
+    write(1, msg, size);
+    if (!status)
         pthread_mutex_unlock(philo->params->write);
-        return (0);
-    }
-    return (1);
+    free(msg);
+    return (0);
 }

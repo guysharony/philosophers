@@ -7,7 +7,7 @@ INCLUDES	= ${SRCS}includes/
 SCRIPTS		= ${SRCS}scripts/
 
 H			= ${INCLUDES}philo_one.h
-C			= ${SCRIPTS}eat.c ${SCRIPTS}init.c ${SCRIPTS}main.c ${SCRIPTS}numbers.c ${SCRIPTS}print.c ${SCRIPTS}thread.c ${SCRIPTS}time.c
+C			= ${SCRIPTS}eat.c ${SCRIPTS}init.c ${SCRIPTS}main.c ${SCRIPTS}numbers.c ${SCRIPTS}print.c ${SCRIPTS}thread.c ${SCRIPTS}utils.c
 
 FILES		= ${U} ${C}
 
