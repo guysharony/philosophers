@@ -1,6 +1,7 @@
 #include "../includes/philosophers.h"
 
-int     err(char *str) {
+int     err(char *str)
+{
     ft_putstr("Error: ");
     ft_putstr(str);
     ft_putchar('\n');

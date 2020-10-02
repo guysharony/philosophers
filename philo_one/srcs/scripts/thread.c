@@ -69,5 +69,20 @@ int         thr(t_philo_one *philo_one)
             philo_one->params->end = 1;
         usleep(1000);
     }
+    /*while (1)
+    {
+        i = 0;
+        while (i < philo_one->params->nb_of_philosophers)
+        {
+            time = ft_time();
+            if (philo_one->philo[i]->last + philo_one->params->tm_to_die < time)
+            {
+                msg(philo_one->philo[i], "is dead.");
+                return (0);
+            }
+            i++;
+        }
+        usleep(1000);
+    }*/
     return (0);
 }
