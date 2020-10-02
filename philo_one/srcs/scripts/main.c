@@ -7,7 +7,8 @@ int     clean(t_philo_one *philo_one)
     i = 0;
     while (i < philo_one->params->nb_of_philosophers)
     {
-        free(philo_one->params->fork[i]);
+        pthread_mutex_destroy(philo_one->params->fork[i]);
+	free(philo_one->params->fork[i]);
         free(philo_one->philo[i]);
         i++;
     }
@@ -15,6 +16,7 @@ int     clean(t_philo_one *philo_one)
     free(philo_one->params->write);
     free(philo_one->params->fork);
     free(philo_one->philo);
+    free(philo_one->params);
     free(philo_one);
     return (1);
 }
