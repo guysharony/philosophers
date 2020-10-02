@@ -1,5 +1,15 @@
 #include "../includes/philo_one.h"
 
+size_t  ft_strlen(char *str)
+{
+    size_t  i;
+
+    i = 0;
+    while (str[i])
+        i++;
+    return (i);
+}
+
 void    ft_putstr(char *str)
 {
     size_t  i;
@@ -47,18 +57,39 @@ int     err(char *str, int help)
     return (1);
 }
 
+void    ft_getstring(char **dst, char *src)
+{
+    while (*src)
+        *(*dst)++ = *src++;
+}
+
 int     msg(t_philos *philo, char *str)
 {
+    char    *time;
+    char    *id;
+    size_t  size;
+    char    *tmp1;
+    char    *tmp2;
+
     if (philo->stop == 0)
     {
-        pthread_mutex_lock(philo->params->write);
-        ft_putnbr(ft_time() - philo->params->start);
-        write(1, " ", 1);
-        ft_putnbr(philo->id);
-        write(1, " ", 1);
-        ft_putstr(str);
-        write(1, "\n", 1);
-        pthread_mutex_unlock(philo->params->write);
+        time = ft_itoa(ft_time() - philo->params->start);
+        id = ft_itoa(philo->id);
+        size = ft_strlen(time) + ft_strlen(id) + ft_strlen(str) + 4;
+        if (!(tmp1 = malloc(sizeof(char) * size)))
+            return (1);
+        tmp2 = tmp1;
+        ft_getstring(&tmp2, time);
+        ft_getstring(&tmp2, " ");
+        ft_getstring(&tmp2, id);
+        ft_getstring(&tmp2, " ");
+        ft_getstring(&tmp2, str);
+        ft_getstring(&tmp2, "\n");
+        *tmp2 = '\0';
+        write(1, tmp1, size);
+        free(time);
+        free(id);
+        free(tmp1);
         return (0);
     }
     return (1);

@@ -43,5 +43,6 @@ int     main(int argc, char **argv)
         return (clean(philo_one) && err("A problem occured during malloc.", 0));
     if (thr(philo_one))
         return (1);
+    while (1);
     return (0);
 }
