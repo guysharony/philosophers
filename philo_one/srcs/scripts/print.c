@@ -57,39 +57,75 @@ int     err(char *str, int help)
     return (1);
 }
 
-void    ft_getstring(char **dst, char *src)
+void    get_string(char **dst, char *src)
 {
     while (*src)
         *(*dst)++ = *src++;
 }
 
+size_t  ft_size(t_philos *philo, char *str, size_t time)
+{
+    size_t  n;
+    size_t  a;
+    size_t  id;
+
+    n = 5;
+    a = 0;
+    id = philo->id;
+    time -= philo->params->start;
+    while (time /= 10)
+        n++;
+    while (id /= 10)
+        n++;
+    while (str[a])
+    {
+        n++;
+        a++;
+    }
+    return (n);
+}
+
+void    get_number(char **dst, size_t nbr)
+{
+    char    c;
+
+	if (nbr >= 10)
+	{
+		get_number(dst, nbr / 10);
+		get_number(dst, nbr % 10);
+	}
+	else
+    {
+        c = nbr + '0';
+		*(*dst)++ = c;
+    }
+}
+
 int     msg(t_philos *philo, char *str)
 {
-    char    *time;
-    char    *id;
     size_t  size;
-    char    *tmp1;
-    char    *tmp2;
+    size_t  time;
+    char    *msg;
+    char    *tmp;
 
     if (philo->stop == 0)
     {
-        time = ft_itoa(ft_time() - philo->params->start);
-        id = ft_itoa(philo->id);
-        size = ft_strlen(time) + ft_strlen(id) + ft_strlen(str) + 4;
-        if (!(tmp1 = malloc(sizeof(char) * size)))
+        pthread_mutex_lock(philo->params->write);
+        time = ft_time();
+        size = ft_size(philo, str, time);
+        if (!(msg = malloc(sizeof(char) * (size + 1))))
             return (1);
-        tmp2 = tmp1;
-        ft_getstring(&tmp2, time);
-        ft_getstring(&tmp2, " ");
-        ft_getstring(&tmp2, id);
-        ft_getstring(&tmp2, " ");
-        ft_getstring(&tmp2, str);
-        ft_getstring(&tmp2, "\n");
-        *tmp2 = '\0';
-        write(1, tmp1, size);
-        free(time);
-        free(id);
-        free(tmp1);
+        tmp = msg;
+        get_number(&tmp, time - philo->params->start);
+        get_string(&tmp, " ");
+        get_number(&tmp, philo->id);
+        get_string(&tmp, " ");
+        get_string(&tmp, str);
+        get_string(&tmp, "\n");
+        *tmp = '\0';
+        write(1, msg, size);
+        free(msg);
+        pthread_mutex_unlock(philo->params->write);
         return (0);
     }
     return (1);
