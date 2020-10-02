@@ -1,6 +1,6 @@
 #include "../includes/philo_two.h"
 
-int             init_options(t_philo_one *tmp, int argc, char **argv)
+int             init_options(t_philo_two *tmp, int argc, char **argv)
 {
     size_t      i;
 
@@ -23,7 +23,7 @@ int             init_options(t_philo_one *tmp, int argc, char **argv)
     return (0);
 }
 
-int             init_philos(t_philo_one *philo_one, int size)
+int             init_philos(t_philo_two *philo_one, int size)
 {
     int         i;
 
@@ -45,11 +45,11 @@ int             init_philos(t_philo_one *philo_one, int size)
     return (0);
 }
 
-t_philo_one     *init(int argc, char **argv)
+t_philo_two     *init(int argc, char **argv)
 {
-    t_philo_one     *tmp;
+    t_philo_two     *tmp;
 
-    if (!(tmp = malloc(sizeof(t_philo_one))))
+    if (!(tmp = malloc(sizeof(t_philo_two))))
         return (NULL);
     if (init_options(tmp, argc, argv))
         return (NULL);

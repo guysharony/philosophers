@@ -1,6 +1,6 @@
 #include "../includes/philo_two.h"
 
-int     clean(t_philo_one *philo_one)
+int     clean(t_philo_two *philo_one)
 {
     size_t  i;
 
@@ -26,13 +26,13 @@ int     args(int argc, char **argv)
 
 int     main(int argc, char **argv)
 {
-    t_philo_one     *philo_one;
+    t_philo_two     *philo_two;
 
     if (args(argc, argv))
         return (1);
-    if ((philo_one = init(argc, argv)) == NULL)
-        return (clean(philo_one) && err("A problem occured during malloc.", 0));
-    thr(philo_one);
-    clean(philo_one);
+    if ((philo_two = init(argc, argv)) == NULL)
+        return (clean(philo_two) && err("A problem occured during malloc.", 0));
+    thr(philo_two);
+    clean(philo_two);
     return (0);
 }

@@ -63,7 +63,7 @@ void    get_number(char **dst, size_t nbr)
     }
 }
 
-int     msg(t_philos *philo, char *str)
+int     msg(t_philos *philo, char *str, int status)
 {
     size_t  time;
     size_t  size;
@@ -72,7 +72,6 @@ int     msg(t_philos *philo, char *str)
 
     if (philo->stop)
         return (1);
-    sem_wait(philo->params->write);
     time = ft_time() - philo->params->start;
     size = ft_size(philo, str, time);
     if (!(msg = malloc(sizeof(char) * (size + 1))))
@@ -85,8 +84,10 @@ int     msg(t_philos *philo, char *str)
     get_string(&tmp, str);
     get_string(&tmp, "\n");
     *tmp++ = '\0';
+    sem_wait(philo->params->write);
     write(1, msg, size);
-    sem_post(philo->params->write);
+    if (!status)
+        sem_post(philo->params->write);
     free(msg);
     return (0);
 }

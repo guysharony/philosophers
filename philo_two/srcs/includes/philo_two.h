@@ -31,22 +31,22 @@
      t_params               *params;     
  }                          t_philos;
 
- typedef struct             s_philo_one
+ typedef struct             s_philo_two
  {
      t_params               *params;
      t_philos               **philo;
- }                          t_philo_one;
+ }                          t_philo_two;
  
  int		                ft_atoi(char *str);
  int                        is_number(char *str);
  int                        are_numbers(int nb, char **values);
  int                        err(char *str, int help);
- int                        msg(t_philos *philo, char *str);
- int                        thr(t_philo_one *philo_one);
+ int                        msg(t_philos *philo, char *str, int status);
+ int                        thr(t_philo_two *philo_one);
  int                        eat(t_philos *tmp);
  char			            *ft_itoa(size_t n);
  void                       ft_putstr(char *str);
  size_t                     ft_time(void);
- t_philo_one                *init(int argc, char **argv);
+ t_philo_two                *init(int argc, char **argv);
 
 #endif

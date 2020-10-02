@@ -9,10 +9,10 @@ void        *monitor(void *philo)
     while (1)
     {
         time = ft_time();
-        if (!tmp->eat && tmp->last + tmp->params->tm_to_die < time)
+        if (!tmp->eat && tmp->last + tmp->params->tm_to_die <= time)
         {
-            msg(tmp, "is dead.");
-            sem_wait(tmp->params->write);
+            msg(tmp, "is dead.", 1);
+            sem_unlink("write");
             tmp->stop = 1;
             tmp->params->nw_eat = 0;
             return (NULL);
@@ -39,14 +39,14 @@ void        *sthr(void *philo)
     {
         if (eat(tmp))
             return (NULL);
-        if (!(msg(tmp, "is sleeping.")))
+        if (!(msg(tmp, "is sleeping.", 0)))
     	    usleep(tmp->params->tm_to_sleep * 1000);
-        msg(tmp, "is thinking.");
+        msg(tmp, "is thinking.", 0);
     }
     return (NULL);
 }
 
-int         thr(t_philo_one *philo_one)
+int         thr(t_philo_two *philo_one)
 {
     size_t      i;
     pthread_t   tid;
@@ -59,6 +59,7 @@ int         thr(t_philo_one *philo_one)
         if (pthread_create(&tid, NULL, &sthr, philo_one->philo[i]))
             return (err("A problem with pthread_create() in \'thread.c\'.", 0));
         pthread_detach(tid);
+        usleep(50);
         i++;
     }
     while (!philo_one->params->end)
