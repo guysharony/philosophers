@@ -1,6 +1,6 @@
 #include "../includes/philo_one.h"
 
-int         aeat(t_philos *tmp)
+int         eat(t_philos *tmp)
 {
     int     i;
 

@@ -45,7 +45,7 @@
  int                        err(char *str, int help);
  int                        msg(t_philos *philo, char *str);
  int                        thr(t_philo_one *philo_one);
- int                        aeat(t_philos *tmp);
+ int                        eat(t_philos *tmp);
  size_t                     ft_time(void);
  t_philo_one                *init(int argc, char **argv);
 
