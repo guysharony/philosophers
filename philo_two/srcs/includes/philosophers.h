@@ -5,6 +5,7 @@
  #include <stdio.h>
  #include <pthread.h>
  #include <semaphore.h>
+ #include <fcntl.h> 
  #include "utils.h"
  
  typedef struct             s_params
