@@ -69,7 +69,7 @@ int         thr(t_philo_one *philo_one)
         if (pthread_create(&tid, NULL, &sthr, philo_one->philo[i]))
             return (err("A problem with pthread_create() in \'thread.c\'.", 0));
         pthread_detach(tid);
-        usleep(100);
+        usleep(10);
         i++;
     }
     while (!philo_one->params->end)
