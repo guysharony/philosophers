@@ -1,26 +1,12 @@
 #include "../includes/philo_one.h"
 
-void        forks1(t_philos *tmp)
-{
-    pthread_mutex_lock(tmp->params->fork[tmp->rfork - 1]);
-    msg(tmp, "has taken a fork.");
-    pthread_mutex_lock(tmp->params->fork[tmp->lfork - 1]);
-    msg(tmp, "has taken a fork.");
-}
-
-void        forks0(t_philos *tmp)
-{
-    pthread_mutex_unlock(tmp->params->fork[tmp->rfork - 1]);
-    pthread_mutex_unlock(tmp->params->fork[tmp->lfork - 1]);
-}
-
 int         aeat(t_philos *tmp)
 {
     int     i;
 
-    pthread_mutex_lock(tmp->params->fork[tmp->rfork - 1]);
+    pthread_mutex_lock(tmp->rfork);
     msg(tmp, "has taken a fork.");
-    pthread_mutex_lock(tmp->params->fork[tmp->lfork - 1]);
+    pthread_mutex_lock(tmp->lfork);
     msg(tmp, "has taken a fork.");
     if (!(i = msg(tmp, "is eating.")))
     {
@@ -31,18 +17,7 @@ int         aeat(t_philos *tmp)
         usleep(tmp->params->tm_to_eat * 1000);
         tmp->eat = 0;
     }
-    pthread_mutex_unlock(tmp->params->fork[tmp->rfork - 1]);
-    pthread_mutex_unlock(tmp->params->fork[tmp->lfork - 1]);
+    pthread_mutex_unlock(tmp->rfork);
+    pthread_mutex_unlock(tmp->lfork);
     return (i);
-}
-
-void        asleep(t_philos *tmp)
-{
-    if (!(msg(tmp, "is sleeping.")))
-    	usleep(tmp->params->tm_to_sleep * 1000);
-}
-
-void        athink(t_philos *tmp)
-{
-    msg(tmp, "is thinking.");
 }

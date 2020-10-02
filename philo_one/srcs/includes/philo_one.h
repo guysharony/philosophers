@@ -23,8 +23,8 @@
  typedef struct             s_philos
  {
      size_t                 id;
-     size_t                 lfork;
-     size_t                 rfork;
+     pthread_mutex_t        *lfork;
+     pthread_mutex_t        *rfork;
      int                    eat;
      int                    stop;
      size_t                 ceat;
