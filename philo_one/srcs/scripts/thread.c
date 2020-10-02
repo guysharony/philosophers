@@ -1,39 +1,27 @@
 #include "../includes/philo_one.h"
 
-int         status(t_philos *tmp)
-{
-    if (tmp->last + tmp->params->tm_to_die <= ft_time())
-        return (1);
-    if (tmp->ceat >= tmp->params->nb_eat_philo)
-        return (2);
-    return (0);
-}
-
 void        *monitor(void *philo)
 {
-    int         i;
     size_t      time;
     t_philos    *tmp;
 
     tmp = (t_philos*)philo;
     while (1)
     {
-        if ((i = status(tmp)))
+        time = ft_time();
+        if (tmp->last + tmp->params->tm_to_die < time || tmp->ceat >= tmp->params->nb_eat_philo)
         {
-            if (i == 1)
+            if (tmp->last + tmp->params->tm_to_die <= time)
             {
                 msg(tmp, "is dead.");
                 pthread_mutex_lock(tmp->params->write);
                 tmp->params->nw_eat = 0;
+                return (NULL);
             }
-            else
-            {
-                tmp->stop = 1;
-                tmp->params->nw_eat--;
-            }
+            tmp->stop = 1;
+            tmp->params->nw_eat--;
             return (NULL);
         }
-	usleep(1000);
     }
 }
 
@@ -69,14 +57,13 @@ int         thr(t_philo_one *philo_one)
         if (pthread_create(&tid, NULL, &sthr, philo_one->philo[i]))
             return (err("A problem with pthread_create() in \'thread.c\'.", 0));
         pthread_detach(tid);
-        usleep(10);
+        usleep(100);
         i++;
     }
     while (!philo_one->params->end)
     {
         if (philo_one->params->nw_eat <= 0)
             philo_one->params->end = 1;
-	usleep(1000);
     }
     return (0);
 }
