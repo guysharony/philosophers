@@ -1,28 +1,36 @@
 #include "../includes/philo_one.h"
 
+int         status(t_philos *tmp)
+{
+    if (tmp->last + tmp->params->tm_to_die <= ft_time())
+        return (1);
+    if (tmp->ceat >= tmp->params->nb_eat_philo)
+        return (2);
+    return (0);
+}
+
 void        *monitor(void *philo)
 {
-    size_t      i;
+    int         i;
     size_t      time;
     t_philos    *tmp;
 
-    i = 0;
     tmp = (t_philos*)philo;
     while (1)
     {
-        time = ft_time();
-        if ((tmp->params->nb_eat_philo != -1 && tmp->ceat >= tmp->params->nb_eat_philo) ||
-        (tmp->eat == 0 && tmp->last + tmp->params->tm_to_die < time))
+        if ((i = status(tmp)))
         {
-            if (tmp->last + tmp->params->tm_to_die < time)
+            if (i == 1)
             {
                 msg(tmp, "is dead.");
                 pthread_mutex_lock(tmp->params->write);
                 tmp->params->nw_eat = 0;
-                return (NULL);
             }
-            tmp->stop = 1;
-            tmp->params->nw_eat--;
+            else
+            {
+                tmp->stop = 1;
+                tmp->params->nw_eat--;
+            }
             return (NULL);
         }
 	usleep(1000);
