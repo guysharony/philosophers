@@ -3,9 +3,9 @@
 void        fork1(t_philos *philo)
 {
     pthread_mutex_lock(philo->rfork);
-    msg(philo, "has taken a fork.", 0);
+    msg(philo, "has taken a fork.");
     pthread_mutex_lock(philo->lfork);
-    msg(philo, "has taken a fork.", 0);
+    msg(philo, "has taken a fork.");
 }
 
 void        fork0(t_philos *philo)
@@ -19,7 +19,7 @@ int         eat(t_philos *tmp)
     int     i;
 
     fork1(tmp);
-    if (!(i = msg(tmp, "is eating.", 0)))
+    if (!(i = msg(tmp, "is eating.")))
     {
         tmp->eat = 1;
         tmp->ceat++;

@@ -43,7 +43,7 @@
  int                        is_number(char *str);
  int                        are_numbers(int nb, char **values);
  int                        err(char *str, int help);
- int                        msg(t_philos *philo, char *str, int status);
+ int                        msg(t_philos *philo, char *str);
  int                        thr(t_philo_one *philo_one);
  int                        eat(t_philos *tmp);
  char			            *ft_itoa(size_t n);
