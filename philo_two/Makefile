@@ -1,15 +1,17 @@
 CC			= gcc
-FLAGS		= -Wall -Werror -Wextra -pthread
+FLAGS		= -Wall -Werror -Wextra
 
 SRCS 		= srcs/
 
 INCLUDES	= ${SRCS}includes/
-SCRIPTS		= ${SRCS}scripts/
+LIB			= ${SRCS}lib/
+UTILS		= ${LIB}utils/
 
-H			= ${INCLUDES}philo_one.h
-C			= ${SCRIPTS}eat.c ${SCRIPTS}init.c ${SCRIPTS}main.c ${SCRIPTS}numbers.c ${SCRIPTS}print.c ${SCRIPTS}thread.c ${SCRIPTS}utils.c
+H			= ${INCLUDES}philosophers.h
+U			= ${UTILS}ft_putchar.c ${UTILS}ft_putnbr.c ${UTILS}ft_putstr.c ${UTILS}ft_strcpy.c ${UTILS}ft_itoa.c ${UTILS}ft_time.c ${UTILS}ft_strlen.c ${UTILS}ft_nbrlen.c ${UTILS}ft_atoi.c ${UTILS}ft_isdigit.c ${UTILS}ft_number.c ${UTILS}ft_numbers.c
+C			= ${LIB}init.c ${LIB}thread.c ${LIB}message.c ${LIB}action.c
 
-FILES		= ${U} ${C}
+FILES		= main.c ${U} ${C}
 
 OBJS		= ${FILES:.c=.o}
 
