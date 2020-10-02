@@ -3,7 +3,7 @@
  #include <unistd.h>
  #include <pthread.h>
  #include <stdlib.h>
- #include <stdio.h>
+ #include <semaphore.h>
  #include <sys/time.h>
 
  typedef struct             s_params
@@ -16,15 +16,13 @@
      size_t                 nw_eat;
      size_t                 start;
      int                    end;
-     pthread_mutex_t        *write;
-     pthread_mutex_t        **fork;
+     sem_t                  *write;
+     sem_t                  *fork;
  }                          t_params;
 
  typedef struct             s_philos
  {
      size_t                 id;
-     pthread_mutex_t        *lfork;
-     pthread_mutex_t        *rfork;
      int                    eat;
      int                    stop;
      size_t                 ceat;
