@@ -49,6 +49,8 @@
  void                       athink(t_philos *tmp);
  char			            *ft_itoa(size_t n);
  void                       ft_putstr(char *str);
+ void                       *mthread(void *philo);
+ void                       mglobal(t_philo_one *philo_one);
  size_t                     ft_time(void);
  t_philo_one                *init(int argc, char **argv);
 
