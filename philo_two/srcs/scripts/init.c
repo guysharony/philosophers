@@ -8,7 +8,7 @@ int             init_options(t_philo_two *tmp, int argc, char **argv)
         return (1);
     tmp->params->nb_of_philosophers = ft_atoi(argv[1]);
     sem_unlink("/fork");
-    fork = sem_open("/fork", O_CREAT, S_IRWXU, tmp->params->nb_of_philosophers);
+    fork = sem_open("/fork", O_CREAT | O_EXCL , S_IRWXU, tmp->params->nb_of_philosophers);
     if (!fork)
         return (1);
     tmp->params->fork = fork;
