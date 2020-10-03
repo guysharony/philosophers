@@ -15,9 +15,6 @@ int             init_options(t_philo_one *tmp, int argc, char **argv)
     tmp->params->tm_to_eat = ft_atoi(argv[3]);
     tmp->params->tm_to_sleep = ft_atoi(argv[4]);
     tmp->params->end = 0;
-    if (!(tmp->params->write = malloc(sizeof(pthread_mutex_t))))
-        return (1);
-    pthread_mutex_init(tmp->params->write, NULL);
     while (i < tmp->params->nb_of_philosophers)
     {
         if (!(tmp->params->fork[i] = malloc(sizeof(pthread_mutex_t))))

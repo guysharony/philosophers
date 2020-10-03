@@ -2,9 +2,7 @@
 
 int     clean(t_philo_two *tmp)
 {
-    size_t  i;
-
-    i = 0;
+    sem_unlink("fork");
     free(tmp->philo);
     free(tmp->params);
     free(tmp);

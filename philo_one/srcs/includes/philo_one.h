@@ -16,7 +16,6 @@
      size_t                 nw_eat;
      size_t                 start;
      int                    end;
-     pthread_mutex_t        *write;
      pthread_mutex_t        **fork;
  }                          t_params;
 
