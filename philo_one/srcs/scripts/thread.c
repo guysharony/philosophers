@@ -8,22 +8,12 @@ void        *monitor(void *philo)
     tmp = (t_philos*)philo;
     while (1)
     {
-        time = ft_time();
-        if (!tmp->eat && tmp->last + tmp->params->tm_to_die < time)
-        {
-            msg(tmp, "is dead.");
-            tmp->stop = 1;
-            pthread_mutex_lock(tmp->params->write);
-            tmp->params->nw_eat = 0;
-            return (NULL);
-        }
-        if (tmp->params->end || tmp->ceat >= tmp->params->nb_eat_philo)
+        if (tmp->params->nb_eat_philo > 0 && tmp->ceat >= tmp->params->nb_eat_philo)
         {
             tmp->stop = 1;
             tmp->params->nw_eat--;
             return (NULL);
         }
-        usleep(1000);
     }
 }
 
@@ -36,13 +26,13 @@ void        *sthr(void *philo)
     if (pthread_create(&tid, NULL, &monitor, tmp))
         return (NULL);
     pthread_detach(tid);
-    while (!tmp->stop)
+    while (1)
     {
-        if (eat(tmp))
+        aeat(tmp);
+        if (tmp->stop)
             return (NULL);
-        if (!(msg(tmp, "is sleeping.")))
-    	    usleep(tmp->params->tm_to_sleep * 1000);
-        msg(tmp, "is thinking.");
+        asleep(tmp);
+        athink(tmp);
     }
     return (NULL);
 }
@@ -50,6 +40,7 @@ void        *sthr(void *philo)
 int         thr(t_philo_one *philo_one)
 {
     size_t      i;
+    size_t      time;
     pthread_t   tid;
 
     i = 0;
@@ -63,26 +54,20 @@ int         thr(t_philo_one *philo_one)
         usleep(100);
         i++;
     }
-    while (!philo_one->params->end)
-    {
-        if (philo_one->params->nw_eat <= 0)
-            philo_one->params->end = 1;
-        usleep(1000);
-    }
-    /*while (1)
+    while (philo_one->params->nw_eat)
     {
         i = 0;
         while (i < philo_one->params->nb_of_philosophers)
         {
             time = ft_time();
-            if (philo_one->philo[i]->last + philo_one->params->tm_to_die < time)
+            if (philo_one->params->nw_eat > 0 && 
+            (!philo_one->philo[i]->eat && philo_one->philo[i]->last + philo_one->params->tm_to_die < time))
             {
                 msg(philo_one->philo[i], "is dead.");
-                return (0);
+                philo_one->params->nw_eat = 0;
             }
             i++;
         }
-        usleep(1000);
-    }*/
+    }
     return (0);
 }

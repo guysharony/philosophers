@@ -65,14 +65,11 @@ void    get_number(char **dst, size_t nbr)
 
 int     msg(t_philos *philo, char *str)
 {
-    size_t  time;
-    size_t  size;
-    char    *msg;
-    char    *tmp;
+    size_t      time;
+    size_t      size;
+    char        *msg;
+    char        *tmp;
 
-    if (philo->stop)
-        return (1);
-    pthread_mutex_lock(philo->params->write);
     time = ft_time() - philo->params->start;
     size = ft_size(philo, str, time);
     if (!(msg = malloc(sizeof(char) * (size + 1))))
@@ -87,6 +84,5 @@ int     msg(t_philos *philo, char *str)
     *tmp++ = '\0';
     write(1, msg, size);
     free(msg);
-    pthread_mutex_unlock(philo->params->write);
     return (0);
 }

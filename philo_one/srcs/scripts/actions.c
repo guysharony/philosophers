@@ -14,19 +14,27 @@ void        fork0(t_philos *philo)
     pthread_mutex_unlock(philo->lfork);
 }
 
-int         eat(t_philos *tmp)
+void        aeat(t_philos *tmp)
 {
     int     i;
 
     fork1(tmp);
-    if (!(i = msg(tmp, "is eating.")))
-    {
-        tmp->eat = 1;
-        tmp->ceat++;
-        tmp->last = ft_time();
-        usleep(tmp->params->tm_to_eat * 1000);
-        tmp->eat = 0;
-    }
+    msg(tmp, "is eating.");
+    tmp->eat = 1;
+    tmp->ceat++;
+    tmp->last = ft_time();
+    usleep(tmp->params->tm_to_eat * 1000);
+    tmp->eat = 0;
     fork0(tmp);
-    return (i);
+}
+
+void        asleep(t_philos *tmp)
+{
+    msg(tmp, "is sleeping.");
+    usleep(tmp->params->tm_to_sleep * 1000);
+}
+
+void        athink(t_philos *tmp)
+{
+    msg(tmp, "is thinking.");
 }
