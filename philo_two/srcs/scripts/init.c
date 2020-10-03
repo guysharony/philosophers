@@ -1,9 +1,13 @@
 #include "../includes/philo_two.h"
 
-void            open_semaphore(char *str, t_params *tmp)
+void            open_semaphore(char *str, t_params *params)
 {
-    sem_unlink(str);
-    tmp->fork = sem_open(str, O_CREAT, S_IRWXU, tmp->nb_of_philosophers);
+    char        *tmp;
+
+    tmp = ft_strdup(str);
+    sem_unlink(tmp);
+    params->fork = sem_open(tmp, O_CREAT, S_IRWXU, params->nb_of_philosophers);
+    free(tmp);
 }
 
 int             init_options(t_philo_two *tmp, int argc, char **argv)

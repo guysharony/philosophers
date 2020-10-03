@@ -49,6 +49,9 @@
  char			            *ft_itoa(size_t n);
  void                       ft_putstr(char *str);
  void                       *mthread(void *philo);
+ char	                    *ft_strdup(const char *s1);
+ char	                    *ft_strcpy(char *dest, const char *src);
+ size_t	                    ft_strlen(const char *s);
  void                       mglobal(t_philo_two *philo_one);
  size_t                     ft_time(void);
  t_philo_two                *init(int argc, char **argv);
