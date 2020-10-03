@@ -2,13 +2,14 @@
 
 int             init_options(t_philo_two *tmp, int argc, char **argv)
 {
+    sem_t       *fork;
+
     if (!(tmp->params = malloc(sizeof(t_params))))
         return (1);
     tmp->params->nb_of_philosophers = ft_atoi(argv[1]);
-    sem_unlink("/write");
     sem_unlink("/fork");
-    tmp->params->fork = sem_open("/write", O_CREAT, S_IRWXU, 1);
-    tmp->params->fork = sem_open("/fork", O_CREAT, S_IRWXU, tmp->params->nb_of_philosophers);
+    fork = sem_open("/fork", O_CREAT, S_IRWXU, tmp->params->nb_of_philosophers);
+    tmp->params->fork = fork;
     tmp->params->nw_eat = tmp->params->nb_of_philosophers;
     tmp->params->tm_to_die = ft_atoi(argv[2]);
     tmp->params->tm_to_eat = ft_atoi(argv[3]);
