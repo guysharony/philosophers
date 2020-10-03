@@ -9,10 +9,10 @@ void        *sthr(void *philo)
     if (pthread_create(&tid, NULL, &mthread, tmp))
         return (NULL);
     pthread_detach(tid);
-    while (1)
+    while (!tmp->stop)
     {
         aeat(tmp);
-        if (tmp->stop)
+        if (tmp->stop || tmp->params->nw_eat <= 0)
             return (NULL);
         asleep(tmp);
         athink(tmp);

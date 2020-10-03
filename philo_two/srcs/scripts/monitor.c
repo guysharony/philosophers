@@ -6,7 +6,7 @@ void        *mthread(void *philo)
     t_philos    *tmp;
 
     tmp = (t_philos*)philo;
-    while (1)
+    while (tmp->params->nw_eat > 0)
     {
         if (tmp->params->nb_eat_philo > 0 && tmp->ceat >= tmp->params->nb_eat_philo)
         {
@@ -16,6 +16,7 @@ void        *mthread(void *philo)
         }
         usleep(1000);
     }
+    return (NULL);
 }
 
 void    mglobal(t_philo_two *tmp)

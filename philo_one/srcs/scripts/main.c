@@ -11,8 +11,6 @@ int     clean(t_philo_one *philo_one)
 	    free(philo_one->params->fork[i]);
         i++;
     }
-    pthread_mutex_destroy(philo_one->params->write);
-    free(philo_one->params->write);
     free(philo_one->params->fork);
     free(philo_one->philo);
     free(philo_one->params);

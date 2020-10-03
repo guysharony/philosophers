@@ -10,7 +10,7 @@ int     clean(t_philo_two *tmp)
         free(tmp->philo[i]);
         i++;
     }
-    sem_close(tmp->params->fork);
+    sem_unlink("fork");
     free(tmp->philo);
     free(tmp->params);
     free(tmp);
