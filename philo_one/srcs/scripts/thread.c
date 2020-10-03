@@ -14,8 +14,9 @@ void        *sthr(void *philo)
         aeat(tmp);
         if (tmp->stop)
             return (NULL);
-        asleep(tmp);
-        athink(tmp);
+        msg(tmp, "is sleeping.");
+        usleep(tmp->params->tm_to_sleep * 1000);
+        msg(tmp, "is thinking.");
     }
     return (NULL);
 }

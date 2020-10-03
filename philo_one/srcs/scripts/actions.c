@@ -16,8 +16,6 @@ void        fork0(t_philos *philo)
 
 void        aeat(t_philos *tmp)
 {
-    int     i;
-
     fork1(tmp);
     msg(tmp, "is eating.");
     tmp->eat = 1;
