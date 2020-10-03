@@ -2,12 +2,11 @@
 
 void            open_semaphore(char *str, t_params *params)
 {
-    char        *tmp;
+    char        tmp[5];
 
-    tmp = ft_strdup(str);
+    ft_strcpy(tmp, str);
     sem_unlink(tmp);
     params->fork = sem_open(tmp, O_CREAT, S_IRWXU, params->nb_of_philosophers);
-    free(tmp);
 }
 
 int             init_options(t_philo_two *tmp, int argc, char **argv)
