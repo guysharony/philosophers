@@ -5,7 +5,6 @@ void            semaphore(t_philo_two *tmp)
     char        buf[250];
 
     sprintf(buf, "/fork");
-    sem_unlink(buf);
     tmp->params->fork = sem_open(buf, O_CREAT | O_EXCL , S_IRWXU, tmp->params->nb_of_philosophers);
 }
 
