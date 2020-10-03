@@ -2,12 +2,10 @@
 
 int             init_options(t_philo_two *tmp, int argc, char **argv)
 {
-    sem_t       *fork;
-
     if (!(tmp->params = malloc(sizeof(t_params))))
         return (1);
     tmp->params->nb_of_philosophers = ft_atoi(argv[1]);
-    if ((tmp->params->fork = sem_open("/fork", O_CREAT, S_IRWXU, tmp->params->nb_of_philosophers)) < 0)
+    if ((tmp->params->fork = sem_open("/fork", O_CREAT, 0644, tmp->params->nb_of_philosophers)) < 0)
         return (1);
     tmp->params->nw_eat = tmp->params->nb_of_philosophers;
     tmp->params->tm_to_die = ft_atoi(argv[2]);
