@@ -1,12 +1,17 @@
 #include "../includes/philo_two.h"
 
+void            open_semaphore(char *str, t_params *tmp)
+{
+    sem_unlink(str);
+    tmp->fork = sem_open(str, O_CREAT, S_IRWXU, tmp->nb_of_philosophers);
+}
+
 int             init_options(t_philo_two *tmp, int argc, char **argv)
 {
     if (!(tmp->params = malloc(sizeof(t_params))))
         return (1);
     tmp->params->nb_of_philosophers = ft_atoi(argv[1]);
-    sem_unlink("fork");
-    tmp->params->fork = sem_open("fork", O_CREAT, S_IRWXU, tmp->params->nb_of_philosophers);
+    open_semaphore("fork", tmp->params);
     tmp->params->nw_eat = tmp->params->nb_of_philosophers;
     tmp->params->tm_to_die = ft_atoi(argv[2]);
     tmp->params->tm_to_eat = ft_atoi(argv[3]);
