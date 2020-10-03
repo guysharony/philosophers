@@ -2,6 +2,15 @@
 
 int     clean(t_philo_two *tmp)
 {
+    size_t  i;
+
+    i = 0;
+    while (i < tmp->params->nb_of_philosophers)
+    {
+        free(tmp->philo[i]);
+        i++;
+    }
+    sem_close(tmp->params->fork);
     sem_unlink("/fork");
     free(tmp->philo);
     free(tmp->params);
