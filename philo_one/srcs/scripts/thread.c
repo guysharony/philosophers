@@ -62,9 +62,9 @@ int         thr(t_philo_one *philo_one)
         {
             time = ft_time();
             if (philo_one->params->nw_eat > 0 &&
-            (!philo_one->philo[i]->eat && philo_one->philo[i]->last + philo_one->params->tm_to_die <= time))
+            (!philo_one->philo[i]->eat && philo_one->philo[i]->last + philo_one->params->tm_to_die < time))
             {
-                msg(philo_one->philo[i], time, "is dead.");
+                msg(philo_one->philo[i], "is dead.");
                 philo_one->params->nw_eat = 0;
             }
             i++;
