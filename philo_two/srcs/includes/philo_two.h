@@ -18,6 +18,7 @@
      size_t                 nw_eat;
      size_t                 start;
      int                    end;
+     sem_t                  *fork;
  }                          t_params;
 
  typedef struct             s_philos
@@ -27,7 +28,6 @@
      int                    stop;
      size_t                 ceat;
      size_t                 last;
-     sem_t                  *fork;
      t_params               *params;     
  }                          t_philos;
 
