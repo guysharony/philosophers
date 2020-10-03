@@ -1,6 +1,6 @@
 #include "../includes/philo_one.h"
 
-void        aeat(t_philos *tmp)
+int         aeat(t_philos *tmp)
 {
     pthread_mutex_lock(tmp->rfork);
     msg(tmp, "has taken a fork.");
@@ -14,4 +14,5 @@ void        aeat(t_philos *tmp)
     tmp->eat = 0;
     pthread_mutex_unlock(tmp->rfork);
     pthread_mutex_unlock(tmp->lfork);
+    return (tmp->stop);
 }

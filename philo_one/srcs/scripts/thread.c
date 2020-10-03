@@ -11,8 +11,7 @@ void        *sthr(void *philo)
     pthread_detach(tid);
     while (1)
     {
-        aeat(tmp);
-        if (tmp->stop)
+        if (aeat(tmp))
             return (NULL);
         msg(tmp, "is sleeping.");
         usleep(tmp->params->tm_to_sleep * 1000);
