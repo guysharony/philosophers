@@ -1,9 +1,9 @@
 #include "../includes/philo_two.h"
 
-void            semaphore(t_philo_two *tmp)
+sem_t           *semaphore(t_philo_two *tmp)
 {
     sem_unlink("/fork");
-    tmp->params->fork = sem_open("/fork", O_CREAT, 0644, tmp->params->nb_of_philosophers);
+    return (sem_open("/fork", O_CREAT, 0644, tmp->params->nb_of_philosophers));
 }
 
 int             init_options(t_philo_two *tmp, int argc, char **argv)
@@ -13,8 +13,6 @@ int             init_options(t_philo_two *tmp, int argc, char **argv)
     if (!(tmp->params = malloc(sizeof(t_params))))
         return (1);
     tmp->params->nb_of_philosophers = ft_atoi(argv[1]);
-    semaphore(tmp);
-    tmp->params->fork = fork;
     tmp->params->nw_eat = tmp->params->nb_of_philosophers;
     tmp->params->tm_to_die = ft_atoi(argv[2]);
     tmp->params->tm_to_eat = ft_atoi(argv[3]);
@@ -29,7 +27,9 @@ int             init_options(t_philo_two *tmp, int argc, char **argv)
 int             init_philos(t_philo_two *tmp, int size)
 {
     int         i;
+    sem_t       *t;
 
+    t = semaphore(tmp);
     i = 0;
     if (!(tmp->philo = malloc(sizeof(t_philos*) * size)))
         return (1);
@@ -38,6 +38,7 @@ int             init_philos(t_philo_two *tmp, int size)
         if (!(tmp->philo[i] = malloc(sizeof(t_philos))))
             return (1);
         tmp->philo[i]->id = i + 1;
+        tmp->philo[i]->fork = t;
         tmp->philo[i]->params = tmp->params;
         tmp->philo[i]->ceat = 0;
         tmp->philo[i]->last = 0;
