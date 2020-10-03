@@ -2,10 +2,8 @@
 
 void            semaphore(t_philo_two *tmp)
 {
-    char        buf[250];
-
-    sprintf(buf, "/fork");
-    tmp->params->fork = sem_open(buf, O_CREAT | O_EXCL , S_IRWXU, tmp->params->nb_of_philosophers);
+    sem_unlink("/fork");
+    tmp->params->fork = sem_open("/fork", O_CREAT, 0644, tmp->params->nb_of_philosophers);
 }
 
 int             init_options(t_philo_two *tmp, int argc, char **argv)
