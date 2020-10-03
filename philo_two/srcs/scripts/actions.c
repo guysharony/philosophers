@@ -2,16 +2,16 @@
 
 void        fork1(t_philos *philo)
 {
-    sem_wait(philo->fork);
+    sem_wait(philo->params->fork);
     msg(philo, "has taken a fork.");
-    sem_wait(philo->fork);
+    sem_wait(philo->params->fork);
     msg(philo, "has taken a fork.");
 }
 
 void        fork0(t_philos *philo)
 {
-    sem_post(philo->fork);
-    sem_post(philo->fork);
+    sem_post(philo->params->fork);
+    sem_post(philo->params->fork);
 }
 
 void        aeat(t_philos *tmp)
