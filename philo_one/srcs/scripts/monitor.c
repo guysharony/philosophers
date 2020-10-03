@@ -14,7 +14,7 @@ void        *mthread(void *philo)
             tmp->params->nw_eat--;
             return (NULL);
         }
-        usleep(1000);
+        usleep(100);
     }
 }
 
@@ -37,6 +37,6 @@ void    mglobal(t_philo_one *philo_one)
             }
             i++;
         }
-        usleep(1000);
+        usleep(100);
     }
 }
