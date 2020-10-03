@@ -2,7 +2,7 @@
 
 int     clean(t_philo_two *tmp)
 {
-    sem_unlink("fork");
+    sem_unlink("/fork");
     free(tmp->philo);
     free(tmp->params);
     free(tmp);
@@ -30,7 +30,7 @@ int     main(int argc, char **argv)
         return (1);
     if ((philo_two = init(argc, argv)) == NULL)
         return (clean(philo_two) && err("A problem occured during malloc.", 0));
-    thr(philo_two);
+    /*thr(philo_two);*/
     clean(philo_two);
     return (0);
 }

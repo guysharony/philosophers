@@ -1,5 +1,25 @@
 #include "../includes/philo_two.h"
 
+/*sem_t   *ft_sem_open(char const *name, int value)
+{
+	sem_unlink(name);
+	return (sem_open(name, O_CREAT | O_EXCL, 0644, value));
+}
+
+char    *make_semaphore_name(char const *base, char *buffer, int position)
+{
+	int	    i;
+
+	i = ft_strcpy(buffer, base);
+	while (position > 0)
+	{
+		buffer[i++] = (position % 10) + '0';
+		position /= 10;
+	}
+	buffer[i] = 0;
+	return (buffer);
+}*/
+
 void            open_semaphore(char *str, t_params *params)
 {
     char        tmp[5];
@@ -14,7 +34,7 @@ int             init_options(t_philo_two *tmp, int argc, char **argv)
     if (!(tmp->params = malloc(sizeof(t_params))))
         return (1);
     tmp->params->nb_of_philosophers = ft_atoi(argv[1]);
-    open_semaphore("fork", tmp->params);
+    open_semaphore("/fork", tmp->params);
     tmp->params->nw_eat = tmp->params->nb_of_philosophers;
     tmp->params->tm_to_die = ft_atoi(argv[2]);
     tmp->params->tm_to_eat = ft_atoi(argv[3]);
