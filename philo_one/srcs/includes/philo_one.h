@@ -42,7 +42,7 @@
  int                        is_number(char *str);
  int                        are_numbers(int nb, char **values);
  int                        err(char *str, int help);
- int                        msg(t_philos *philo, char *str);
+ int                        msg(t_philos *philo, size_t time, char *str);
  int                        thr(t_philo_one *philo_one);
  void                       aeat(t_philos *tmp);
  void                       asleep(t_philos *tmp);

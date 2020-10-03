@@ -63,19 +63,19 @@ void    get_number(char **dst, size_t nbr)
     }
 }
 
-int     msg(t_philos *philo, char *str)
+int     msg(t_philos *philo, size_t time, char *str)
 {
-    size_t      time;
+    size_t      tm;
     size_t      size;
     char        *msg;
     char        *tmp;
 
-    time = ft_time() - philo->params->start;
-    size = ft_size(philo, str, time);
+    tm = time - philo->params->start;
+    size = ft_size(philo, str, tm);
     if (!(msg = malloc(sizeof(char) * (size + 1))))
         return (1);
     tmp = msg;
-    get_number(&tmp, time);
+    get_number(&tmp, tm);
     get_string(&tmp, " ");
     get_number(&tmp, philo->id);
     get_string(&tmp, " ");

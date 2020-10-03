@@ -60,10 +60,10 @@ int         thr(t_philo_one *philo_one)
         while (i < philo_one->params->nb_of_philosophers)
         {
             time = ft_time();
-            if (philo_one->params->nw_eat > 0 && 
+            if (philo_one->params->nw_eat > 0 &&
             (!philo_one->philo[i]->eat && philo_one->philo[i]->last + philo_one->params->tm_to_die <= time))
             {
-                msg(philo_one->philo[i], "is dead.");
+                msg(philo_one->philo[i], time, "is dead.");
                 philo_one->params->nw_eat = 0;
             }
             i++;
