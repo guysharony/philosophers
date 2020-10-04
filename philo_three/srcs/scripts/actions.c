@@ -3,8 +3,8 @@
 void        fork1(t_philos *philo)
 {
     sem_wait(philo->params->fork);
-    msg(philo, "has taken a fork.");
     sem_wait(philo->params->fork);
+    msg(philo, "has taken a fork.");
     msg(philo, "has taken a fork.");
 }
 
@@ -16,8 +16,6 @@ void        fork0(t_philos *philo)
 
 void        aeat(t_philos *tmp)
 {
-    int     i;
-
     fork1(tmp);
     msg(tmp, "is eating.");
     tmp->eat = 1;

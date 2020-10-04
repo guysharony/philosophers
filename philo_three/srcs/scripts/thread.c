@@ -7,7 +7,7 @@ void        sthr(t_philos *philo)
     if (pthread_create(&tid, NULL, &mthread, philo))
         exit(0);
     pthread_detach(tid);
-    while (!philo->stop)
+    while (!philo->params->end)
     {
         aeat(philo);
         if (philo->stop)
@@ -15,7 +15,7 @@ void        sthr(t_philos *philo)
         asleep(philo);
         athink(philo);
     }
-    exit(1);
+    exit(2);
 }
 
 int         thr(t_philo_three *tmp)
@@ -37,20 +37,6 @@ int         thr(t_philo_three *tmp)
         usleep(100);
         i++;
     }
-    while (1)
-    {
-        i = 0;
-        while (i < tmp->params->nb_of_philosophers)
-        {
-            j = 0;
-            waitpid(tmp->philo[i]->pid, &j, WNOHANG);
-            if (WIFEXITED(j))
-            {
-                if (WEXITSTATUS(j) == 1)
-                    n++;
-            }
-            i++;
-        }
-    }
+    mglobal(tmp);
     return (0);
 }

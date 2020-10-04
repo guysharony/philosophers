@@ -19,6 +19,7 @@
      size_t                 nw_eat;
      size_t                 start;
      int                    end;
+     sem_t                  *write;
      sem_t                  *fork;
  }                          t_params;
 
@@ -54,7 +55,7 @@
  char	                    *ft_strdup(const char *s1);
  char	                    *ft_strcpy(char *dest, const char *src);
  size_t	                    ft_strlen(const char *s);
- void                       mglobal(t_philo_three *philo_three);
+ int                        mglobal(t_philo_three *philo_three);
  size_t                     ft_time(void);
  t_philo_three              *init(int argc, char **argv);
 
