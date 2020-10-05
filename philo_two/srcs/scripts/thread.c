@@ -11,22 +11,9 @@ void        *sthr(void *philo)
     pthread_detach(tid);
     while (1)
     {
-        sem_wait(tmp->params->fork);
-        sem_wait(tmp->params->fork);
-        sem_wait(tmp->params->write);
-        msg(tmp, "has taken a fork.");
-        msg(tmp, "has taken a fork.");
-        sem_post(tmp->params->write);
-        sem_wait(tmp->params->write);
-        msg(tmp, "is eating.");
-        sem_post(tmp->params->write);
-        tmp->eat = 1;
-        tmp->ceat++;
-        tmp->last = ft_time();
-        usleep(tmp->params->tm_to_eat * 1000);
-        tmp->eat = 0;
-        sem_post(tmp->params->fork);
-        sem_post(tmp->params->fork);
+        fork1(tmp);
+        aeat(tmp);
+        fork0(tmp);
         sem_wait(tmp->params->write);
         msg(tmp, "is sleeping.");
         sem_post(tmp->params->write);
