@@ -23,16 +23,13 @@ void        *mthread(void *philo)
                 tmp->params->nw_eat--;
             return (NULL);
         }
-        usleep(1000);
+        usleep(100);
     }
 }
 
 void    mglobal(t_philo_two *philo_two)
 {
     while (1)
-    {
         if (philo_two->params->nw_eat <= 0)
             break;
-        usleep(1000);
-    }
 }
