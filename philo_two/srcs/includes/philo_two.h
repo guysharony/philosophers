@@ -44,8 +44,6 @@
  int                        msg(t_philos *philo, char *str);
  int                        thr(t_philo_two *philo_two);
  int                        aeat(t_philos *tmp);
- void                       asleep(t_philos *tmp);
- void                       athink(t_philos *tmp);
  char			            *ft_itoa(size_t n);
  void                       ft_putstr(char *str);
  void                       *mthread(void *philo);
