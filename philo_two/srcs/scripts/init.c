@@ -15,7 +15,6 @@ int             init_options(t_philo_two *tmp, int argc, char **argv)
     tmp->params->tm_to_die = ft_atoi(argv[2]);
     tmp->params->tm_to_eat = ft_atoi(argv[3]);
     tmp->params->tm_to_sleep = ft_atoi(argv[4]);
-    tmp->params->end = 0;
     tmp->params->nb_eat_philo = -1;
     if (argc == 6)
         tmp->params->nb_eat_philo = ft_atoi(argv[5]);

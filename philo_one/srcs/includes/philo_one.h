@@ -15,7 +15,6 @@
      size_t                 nb_eat_philo;
      size_t                 nw_eat;
      size_t                 start;
-     int                    end;
      pthread_mutex_t        *write;
      pthread_mutex_t        **fork;
  }                          t_params;

@@ -11,8 +11,7 @@ void        *sthr(void *philo)
     pthread_detach(tid);
     while (!tmp->stop)
     {
-        aeat(tmp);
-        if (tmp->stop || tmp->params->nw_eat <= 0)
+        if (aeat(tmp))
             return (NULL);
         asleep(tmp);
         athink(tmp);

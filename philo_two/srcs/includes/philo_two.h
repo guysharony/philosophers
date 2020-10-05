@@ -17,7 +17,6 @@
      size_t                 nb_eat_philo;
      size_t                 nw_eat;
      size_t                 start;
-     int                    end;
      sem_t                  *write;
      sem_t                  *fork;
  }                          t_params;
@@ -44,7 +43,7 @@
  int                        err(char *str, int help);
  int                        msg(t_philos *philo, char *str);
  int                        thr(t_philo_two *philo_two);
- void                       aeat(t_philos *tmp);
+ int                        aeat(t_philos *tmp);
  void                       asleep(t_philos *tmp);
  void                       athink(t_philos *tmp);
  char			            *ft_itoa(size_t n);
