@@ -9,9 +9,10 @@ void        *sthr(void *philo)
     if (pthread_create(&tid, NULL, &mthread, tmp))
         return (NULL);
     pthread_detach(tid);
-    while (!tmp->stop)
+    while (1)
     {
-        aeat(tmp);
+        if (aeat(tmp))
+            return (NULL);
         sem_wait(tmp->write);
         msg(tmp, "is sleeping.");
         sem_post(tmp->write);
