@@ -19,6 +19,22 @@ void        ft_putstr(char *str)
     }
 }
 
+void		ft_putnbr(size_t nbr)
+{
+	char 	c;
+	
+	if (nbr >= 10)
+	{
+		ft_putnbr(nbr / 10);
+		ft_putnbr(nbr % 10);
+	}
+	else
+	{
+		c = nbr + '0';
+		write(1, &c, 1);
+	}
+}
+
 size_t	    ft_strlen(const char *s)
 {
 	size_t	t;

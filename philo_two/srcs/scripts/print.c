@@ -65,24 +65,13 @@ void    get_number(char **dst, size_t nbr)
 
 int     msg(t_philos *philo, char *str)
 {
-    size_t      time;
-    size_t      size;
-    char        *msg;
-    char        *tmp;
-
-    time = ft_time() - philo->params->start;
-    size = ft_size(philo, str, time);
-    if (!(msg = malloc(sizeof(char) * (size + 1))))
-        return (1);
-    tmp = msg;
-    get_number(&tmp, time);
-    get_string(&tmp, " ");
-    get_number(&tmp, philo->id);
-    get_string(&tmp, " ");
-    get_string(&tmp, str);
-    get_string(&tmp, "\n");
-    *tmp++ = '\0';
-    write(1, msg, size);
-    free(msg);
+    sem_wait(philo->params->write);
+    ft_putnbr(ft_time() - philo->params->start);
+    write(1, " ", 1);
+    ft_putnbr(philo->id);
+    write(1, " ", 1);
+    ft_putstr(str);
+    write(1, "\n", 1);
+    sem_post(philo->params->write);
     return (0);
 }

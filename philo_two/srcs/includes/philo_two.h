@@ -48,6 +48,7 @@
  void                       athink(t_philos *tmp);
  char			            *ft_itoa(size_t n);
  void                       ft_putstr(char *str);
+ void		                ft_putnbr(size_t nbr);
  void                       *mthread(void *philo);
  char	                    *ft_strdup(const char *s1);
  char	                    *ft_strcpy(char *dest, const char *src);
