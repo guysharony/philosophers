@@ -31,7 +31,7 @@ int         thr(t_philo_two *tmp)
         if (pthread_create(&tid, NULL, &sthr, tmp->philo[i]))
             return (err("A problem with pthread_create() in \'thread.c\'.", 0));
         pthread_detach(tid);
-        usleep(100);
+        usleep(50);
         i++;
     }
     mglobal(tmp);
