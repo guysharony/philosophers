@@ -13,8 +13,13 @@ void        *sthr(void *philo)
     {
         if (aeat(tmp))
             return (NULL);
-        asleep(tmp);
-        athink(tmp);
+        sem_wait(tmp->write);
+        msg(tmp, "is sleeping.");
+        sem_post(tmp->write);
+        usleep(tmp->params->tm_to_sleep * 1000);
+        sem_wait(tmp->write);
+        msg(tmp, "is thinking.");
+        sem_post(tmp->write);
     }
     return (NULL);
 }
@@ -32,7 +37,6 @@ int         thr(t_philo_two *tmp)
         if (pthread_create(&tid, NULL, &sthr, tmp->philo[i]))
             return (err("A problem with pthread_create() in \'thread.c\'.", 0));
         pthread_detach(tid);
-        usleep(100);
         i++;
     }
     mglobal(tmp);
