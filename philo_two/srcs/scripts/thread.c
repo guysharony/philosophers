@@ -9,9 +9,11 @@ void        *sthr(void *philo)
     if (pthread_create(&tid, NULL, &mthread, tmp))
         return (NULL);
     pthread_detach(tid);
-    while (1)
+    while (!tmp->stop)
     {
         aeat(tmp);
+        if (tmp->stop || tmp->params->nw_eat <= 0)
+            return (NULL);
         asleep(tmp);
         athink(tmp);
     }
@@ -31,7 +33,7 @@ int         thr(t_philo_two *tmp)
         if (pthread_create(&tid, NULL, &sthr, tmp->philo[i]))
             return (err("A problem with pthread_create() in \'thread.c\'.", 0));
         pthread_detach(tid);
-        usleep(50);
+        usleep(100);
         i++;
     }
     mglobal(tmp);

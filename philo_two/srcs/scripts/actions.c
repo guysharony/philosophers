@@ -1,19 +1,31 @@
 #include "../includes/philo_two.h"
 
+void        fork1(t_philos *philo)
+{
+    sem_wait(philo->params->fork);
+    msg(philo, "has taken a fork.");
+    sem_wait(philo->params->fork);
+    msg(philo, "has taken a fork.");
+}
+
+void        fork0(t_philos *philo)
+{
+    sem_post(philo->params->fork);
+    sem_post(philo->params->fork);
+}
+
 void        aeat(t_philos *tmp)
 {
-    sem_wait(tmp->params->fork);
-    sem_wait(tmp->params->fork);
-    msg(tmp, "has taken a fork.");
-    msg(tmp, "has taken a fork.");
+    int     i;
+
+    fork1(tmp);
     msg(tmp, "is eating.");
     tmp->eat = 1;
     tmp->ceat++;
     tmp->last = ft_time();
     usleep(tmp->params->tm_to_eat * 1000);
     tmp->eat = 0;
-    sem_post(tmp->params->fork);
-    sem_post(tmp->params->fork);
+    fork0(tmp);
 }
 
 void        asleep(t_philos *tmp)

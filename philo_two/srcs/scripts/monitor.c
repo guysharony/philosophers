@@ -6,33 +6,38 @@ void        *mthread(void *philo)
     t_philos    *tmp;
 
     tmp = (t_philos*)philo;
-    while (1)
+    while (tmp->params->nw_eat > 0)
     {
-        time = ft_time();
-        if ((!tmp->eat && tmp->last + tmp->params->tm_to_die < time) ||
-        (tmp->params->nb_eat_philo > 0 && tmp->ceat >= tmp->params->nb_eat_philo))
+        if (tmp->params->nb_eat_philo > 0 && tmp->ceat >= tmp->params->nb_eat_philo)
         {
             tmp->stop = 1;
-            if (tmp->last + tmp->params->tm_to_die < time)
-            {
-                sem_wait(tmp->params->write);
-                msg(tmp, "is dead.");
-                tmp->params->nw_eat = 0;
-            }
-            else
-                tmp->params->nw_eat--;
+            tmp->params->nw_eat--;
             return (NULL);
         }
         usleep(1000);
     }
+    return (NULL);
 }
 
-void    mglobal(t_philo_two *philo_two)
+void    mglobal(t_philo_two *tmp)
 {
-    while (1)
+    size_t  time;
+    size_t  i;
+
+    while (tmp->params->nw_eat)
     {
-        if (philo_two->params->nw_eat <= 0)
-            break;
+        i = 0;
+        while (i < tmp->params->nb_of_philosophers)
+        {
+            time = ft_time();
+            if (tmp->params->nw_eat > 0 &&
+            (!tmp->philo[i]->eat && tmp->philo[i]->last + tmp->params->tm_to_die < time))
+            {
+                msg(tmp->philo[i], "is dead.");
+                tmp->params->nw_eat = 0;
+            }
+            i++;
+        }
         usleep(1000);
     }
 }
