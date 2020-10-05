@@ -11,9 +11,7 @@ void        *sthr(void *philo)
     pthread_detach(tid);
     while (1)
     {
-        fork1(tmp);
         aeat(tmp);
-        fork0(tmp);
         asleep(tmp);
         athink(tmp);
     }

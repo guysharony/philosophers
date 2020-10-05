@@ -43,8 +43,6 @@
  int                        err(char *str, int help);
  int                        msg(t_philos *philo, char *str);
  int                        thr(t_philo_two *philo_two);
- void                       fork1(t_philos *tmp);
- void                       fork0(t_philos *tmp);
  void                       aeat(t_philos *tmp);
  void                       asleep(t_philos *tmp);
  void                       athink(t_philos *tmp);
