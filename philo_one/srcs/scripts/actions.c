@@ -3,10 +3,12 @@
 int         aeat(t_philos *tmp)
 {
     pthread_mutex_lock(tmp->rfork);
-    msg(tmp, "has taken a fork.");
     pthread_mutex_lock(tmp->lfork);
+    pthread_mutex_lock(tmp->params->write);
+    msg(tmp, "has taken a fork.");
     msg(tmp, "has taken a fork.");
     msg(tmp, "is eating.");
+    pthread_mutex_unlock(tmp->params->write);
     tmp->eat = 1;
     tmp->ceat++;
     tmp->last = ft_time();
@@ -15,4 +17,19 @@ int         aeat(t_philos *tmp)
     pthread_mutex_unlock(tmp->rfork);
     pthread_mutex_unlock(tmp->lfork);
     return (tmp->stop);
+}
+
+void        asleep(t_philos *tmp)
+{
+    pthread_mutex_lock(tmp->params->write);
+    msg(tmp, "is sleeping.");
+    pthread_mutex_unlock(tmp->params->write);
+    usleep(tmp->params->tm_to_sleep * 1000);
+}
+
+void        athink(t_philos *tmp)
+{
+    pthread_mutex_lock(tmp->params->write);
+    msg(tmp, "is thinking.");
+    pthread_mutex_unlock(tmp->params->write);
 }

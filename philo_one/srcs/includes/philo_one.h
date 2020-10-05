@@ -16,6 +16,7 @@
      size_t                 nw_eat;
      size_t                 start;
      int                    end;
+     pthread_mutex_t        *write;
      pthread_mutex_t        **fork;
  }                          t_params;
 
@@ -44,6 +45,8 @@
  int                        msg(t_philos *philo, char *str);
  int                        thr(t_philo_one *philo_one);
  int                        aeat(t_philos *tmp);
+ void                       asleep(t_philos *tmp);
+ void                       athink(t_philos *tmp);
  char			            *ft_itoa(size_t n);
  void                       ft_putstr(char *str);
  void                       *mthread(void *philo);

@@ -13,9 +13,8 @@ void        *sthr(void *philo)
     {
         if (aeat(tmp))
             return (NULL);
-        msg(tmp, "is sleeping.");
-        usleep(tmp->params->tm_to_sleep * 1000);
-        msg(tmp, "is thinking.");
+        asleep(tmp);
+        athink(tmp);
     }
     return (NULL);
 }
