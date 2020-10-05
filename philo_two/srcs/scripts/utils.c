@@ -28,26 +28,3 @@ size_t	    ft_strlen(const char *s)
 		t++;
 	return (t);
 }
-
-char	*ft_strdup(const char *s1)
-{
-	char	*a;
-
-	if (!(a = (char*)malloc(sizeof(*a) * (ft_strlen(s1) + 1))))
-		return (NULL);
-	return (ft_strcpy(a, (char *)s1));
-}
-
-char	*ft_strcpy(char *dest, const char *src)
-{
-	unsigned int a;
-
-	a = 0;
-	while (src[a])
-	{
-		dest[a] = src[a];
-		a++;
-	}
-	dest[a] = '\0';
-	return (dest);
-}
