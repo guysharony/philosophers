@@ -9,7 +9,7 @@ void        *sthr(void *philo)
     if (pthread_create(&tid, NULL, &mthread, tmp))
         return (NULL);
     pthread_detach(tid);
-    while (!tmp->stop)
+    while (1)
     {
         if (aeat(tmp))
             return (NULL);
