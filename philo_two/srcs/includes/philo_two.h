@@ -18,6 +18,7 @@
      size_t                 nw_eat;
      size_t                 start;
      int                    end;
+     sem_t                  *write;
      sem_t                  *fork;
  }                          t_params;
 
