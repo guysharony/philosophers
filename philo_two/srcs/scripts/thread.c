@@ -33,17 +33,7 @@ int         thr(t_philo_two *tmp)
             return (err("A problem with pthread_create() in \'thread.c\'.", 0));
         pthread_detach(tid);
         usleep(100);
-        i += 2;
-    }
-    i = 1;
-    while (i < tmp->params->nb_of_philosophers)
-    {
-        tmp->philo[i]->last = tmp->params->start;
-        if (pthread_create(&tid, NULL, &sthr, tmp->philo[i]))
-            return (err("A problem with pthread_create() in \'thread.c\'.", 0));
-        pthread_detach(tid);
-        usleep(100);
-        i += 2;
+        i++;
     }
     mglobal(tmp);
     return (0);

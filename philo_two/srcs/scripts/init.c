@@ -18,11 +18,11 @@ int             init_options(t_philo_two *tmp, int argc, char **argv)
 
 int             init_philos(t_philo_two *tmp, int size)
 {
-    int         i;
+    size_t      i;
+    size_t      j;
     sem_t       *fork;
     sem_t       *write;
 
-    i = 0;
     sem_unlink("fork");
     if ((fork = sem_open("fork", O_CREAT, S_IRWXU, tmp->params->nb_of_philosophers)) < 0)
         return (1);
@@ -31,11 +31,13 @@ int             init_philos(t_philo_two *tmp, int size)
         return (1);
     if (!(tmp->philo = malloc(sizeof(t_philos*) * size)))
         return (1);
+    j = 0;
+    i = 0;
     while (i < size)
     {
         if (!(tmp->philo[i] = malloc(sizeof(t_philos))))
             return (1);
-        tmp->philo[i]->id = i + 1;
+        tmp->philo[i]->id = j + 1;
         tmp->philo[i]->params = tmp->params;
         tmp->philo[i]->fork = fork;
         tmp->philo[i]->write = write;
@@ -44,6 +46,9 @@ int             init_philos(t_philo_two *tmp, int size)
         tmp->philo[i]->eat = 0;
         tmp->philo[i]->stop = 0;
         i++;
+        j += 2;
+        if (j >= size)
+            j = 1;
     }
     return (0);
 }
