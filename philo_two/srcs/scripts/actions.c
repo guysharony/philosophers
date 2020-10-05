@@ -1,6 +1,6 @@
 #include "../includes/philo_two.h"
 
-int     aeat(t_philos *tmp)
+int         aeat(t_philos *tmp)
 {
     sem_wait(tmp->fork);
     sem_wait(tmp->fork);
@@ -17,4 +17,19 @@ int     aeat(t_philos *tmp)
     sem_post(tmp->fork);
     sem_post(tmp->fork);
     return (tmp->stop);
+}
+
+void        asleep(t_philos *tmp)
+{
+    sem_wait(tmp->write);
+    msg(tmp, "is sleeping.");
+    sem_post(tmp->write);
+    usleep(tmp->params->tm_to_sleep * 1000);
+}
+
+void        athink(t_philos *tmp)
+{
+    sem_wait(tmp->write);
+    msg(tmp, "is thinking.");
+    sem_post(tmp->write);
 }
