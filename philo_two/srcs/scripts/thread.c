@@ -12,8 +12,6 @@ void        *sthr(void *philo)
     while (!tmp->stop)
     {
         aeat(tmp);
-        if (tmp->stop || tmp->params->nw_eat <= 0)
-            return (NULL);
         asleep(tmp);
         athink(tmp);
     }
