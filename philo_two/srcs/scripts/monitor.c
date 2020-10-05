@@ -16,7 +16,7 @@ void        *mthread(void *philo)
             if (tmp->last + tmp->params->tm_to_die < time)
             {
                 sem_wait(tmp->write);
-                ddie(tmp);
+                msg(tmp, "is dead.");
                 tmp->params->nw_eat = 0;
             }
             else

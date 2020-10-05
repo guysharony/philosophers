@@ -14,11 +14,11 @@ void        *sthr(void *philo)
         if (aeat(tmp))
             return (NULL);
         sem_wait(tmp->write);
-        dsleep(tmp);
+        msg(tmp, "is sleeping.");
         sem_post(tmp->write);
         usleep(tmp->params->tm_to_sleep * 1000);
         sem_wait(tmp->write);
-        dthink(tmp);
+        msg(tmp, "is thinking.");
         sem_post(tmp->write);
     }
     return (NULL);
