@@ -8,8 +8,8 @@ int             init_options(t_philo_two *tmp, int argc, char **argv)
     sem_unlink("fork");
     if ((tmp->params->fork = sem_open("fork", O_CREAT, S_IRWXU, tmp->params->nb_of_philosophers)) < 0)
         return (1);
-    sem_unlink("wait");
-    if ((tmp->params->fork = sem_open("wait", O_CREAT, S_IRWXU, tmp->params->nb_of_philosophers)) < 0)
+    sem_unlink("write");
+    if ((tmp->params->write = sem_open("write", O_CREAT, S_IRWXU, 1)) < 0)
         return (1);
     tmp->params->nw_eat = tmp->params->nb_of_philosophers;
     tmp->params->tm_to_die = ft_atoi(argv[2]);
