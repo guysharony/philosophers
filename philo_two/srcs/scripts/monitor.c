@@ -9,22 +9,20 @@ void        *mthread(void *philo)
     while (1)
     {
         time = ft_time();
-        if ((!tmp->eat && tmp->last + tmp->params->tm_to_die < time) ||
-        (tmp->params->nb_eat_philo > 0 && tmp->ceat >= tmp->params->nb_eat_philo))
+        if (!tmp->eat && tmp->last + tmp->params->tm_to_die < time)
         {
-            tmp->stop = 1;
-            if (tmp->last + tmp->params->tm_to_die < time)
-            {
-                sem_wait(tmp->write);
-                msg(tmp, "is dead.");
-                tmp->params->nw_eat = 0;
-            }
-            else
-                tmp->params->nw_eat--;
-            return (NULL);
+            sem_wait(tmp->write);
+            msg(tmp, "is dead.");
+            tmp->params->nw_eat = 0;
+            break;
         }
-        usleep(100);
+        if (tmp->params->nb_eat_philo > 0 && tmp->ceat >= tmp->params->nb_eat_philo)
+        {
+            tmp->params->nw_eat--;
+            break;
+        }
     }
+    return (NULL);
 }
 
 void    mglobal(t_philo_two *philo_one)

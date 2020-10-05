@@ -17,18 +17,3 @@ void        aeat(t_philos *tmp)
     sem_post(tmp->fork);
     sem_post(tmp->fork);
 }
-
-void        asleep(t_philos *tmp)
-{
-    sem_wait(tmp->write);
-    msg(tmp, "is sleeping.");
-    sem_post(tmp->write);
-    usleep(tmp->params->tm_to_sleep * 1000);
-}
-
-void        athink(t_philos *tmp)
-{
-    sem_wait(tmp->write);
-    msg(tmp, "is thinking.");
-    sem_post(tmp->write);
-}
