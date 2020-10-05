@@ -1,6 +1,6 @@
 #include "../includes/philo_two.h"
 
-int         aeat(t_philos *tmp)
+void        aeat(t_philos *tmp)
 {
     sem_wait(tmp->params->fork);
     sem_wait(tmp->params->fork);
@@ -16,5 +16,4 @@ int         aeat(t_philos *tmp)
     tmp->eat = 0;
     sem_post(tmp->params->fork);
     sem_post(tmp->params->fork);
-    return (tmp->stop);
 }

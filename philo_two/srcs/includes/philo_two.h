@@ -43,7 +43,7 @@
  int                        err(char *str, int help);
  int                        msg(t_philos *philo, char *str);
  int                        thr(t_philo_two *philo_two);
- int                        aeat(t_philos *tmp);
+ void                       aeat(t_philos *tmp);
  char			            *ft_itoa(size_t n);
  void                       ft_putstr(char *str);
  void                       *mthread(void *philo);

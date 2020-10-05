@@ -11,8 +11,7 @@ void        *sthr(void *philo)
     pthread_detach(tid);
     while (1)
     {
-        if (aeat(tmp))
-            return (NULL);
+        aeat(tmp);
         sem_wait(tmp->params->write);
         msg(tmp, "is sleeping.");
         sem_post(tmp->params->write);
