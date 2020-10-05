@@ -5,12 +5,6 @@ int             init_options(t_philo_two *tmp, int argc, char **argv)
     if (!(tmp->params = malloc(sizeof(t_params))))
         return (1);
     tmp->params->nb_of_philosophers = ft_atoi(argv[1]);
-    sem_unlink("fork");
-    if ((tmp->params->fork = sem_open("fork", O_CREAT, S_IRWXU, tmp->params->nb_of_philosophers)) < 0)
-        return (1);
-    sem_unlink("write");
-    if ((tmp->params->write = sem_open("write", O_CREAT, S_IRWXU, 1)) < 0)
-        return (1);
     tmp->params->nw_eat = tmp->params->nb_of_philosophers;
     tmp->params->tm_to_die = ft_atoi(argv[2]);
     tmp->params->tm_to_eat = ft_atoi(argv[3]);
@@ -25,8 +19,16 @@ int             init_options(t_philo_two *tmp, int argc, char **argv)
 int             init_philos(t_philo_two *tmp, int size)
 {
     int         i;
+    sem_t       *fork;
+    sem_t       *write;
 
     i = 0;
+    sem_unlink("fork");
+    if ((fork = sem_open("fork", O_CREAT, S_IRWXU, tmp->params->nb_of_philosophers)) < 0)
+        return (1);
+    sem_unlink("write");
+    if ((write = sem_open("write", O_CREAT, S_IRWXU, 1)) < 0)
+        return (1);
     if (!(tmp->philo = malloc(sizeof(t_philos*) * size)))
         return (1);
     while (i < size)
@@ -35,6 +37,8 @@ int             init_philos(t_philo_two *tmp, int size)
             return (1);
         tmp->philo[i]->id = i + 1;
         tmp->philo[i]->params = tmp->params;
+        tmp->philo[i]->fork = fork;
+        tmp->philo[i]->write = write;
         tmp->philo[i]->ceat = 0;
         tmp->philo[i]->last = 0;
         tmp->philo[i]->eat = 0;
