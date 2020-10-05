@@ -6,9 +6,9 @@ int     aeat(t_philos *tmp)
     sem_wait(tmp->fork);
     tmp->eat = 1;
     sem_wait(tmp->write);
-    msg(tmp, "has taken a fork.");
-    msg(tmp, "has taken a fork.");
-    msg(tmp, "is eating.");
+    dfork(tmp);
+    dfork(tmp);
+    deat(tmp);
     sem_post(tmp->write);
     tmp->ceat++;
     tmp->last = ft_time();

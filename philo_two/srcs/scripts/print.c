@@ -26,24 +26,19 @@ void    get_string(char **dst, char *src)
         *(*dst)++ = *src++;
 }
 
-size_t  ft_size(t_philos *philo, char *str, size_t time)
+size_t  ft_size(t_philos *philo, size_t time)
 {
     size_t  n;
-    size_t  a;
-    size_t  id;
+    size_t  i;
+    size_t  t;
 
-    n = 5;
-    a = 0;
-    id = philo->id;
+    n = 0;
+    t = time;
+    i = philo->id;
     while (time /= 10)
         n++;
-    while (id /= 10)
+    while (i /= 10)
         n++;
-    while (str[a])
-    {
-        n++;
-        a++;
-    }
     return (n);
 }
 
@@ -63,7 +58,7 @@ void    get_number(char **dst, size_t nbr)
     }
 }
 
-int     msg(t_philos *philo, char *str)
+int     dfork(t_philos *philo)
 {
     size_t      time;
     size_t      size;
@@ -71,18 +66,104 @@ int     msg(t_philos *philo, char *str)
     char        *tmp;
 
     time = ft_time() - philo->params->start;
-    size = ft_size(philo, str, time);
+    size = ft_size(philo, time) + 21;
     if (!(msg = malloc(sizeof(char) * (size + 1))))
         return (1);
     tmp = msg;
     get_number(&tmp, time);
     get_string(&tmp, " ");
     get_number(&tmp, philo->id);
-    get_string(&tmp, " ");
-    get_string(&tmp, str);
-    get_string(&tmp, "\n");
+    get_string(&tmp, " is taking a fork.\n");
     *tmp++ = '\0';
-    write(1, msg, size);
+    write(1, msg, size + 1);
+    free(msg);
+    return (0);
+}
+
+int     deat(t_philos *philo)
+{
+    size_t      time;
+    size_t      size;
+    char        *msg;
+    char        *tmp;
+
+    time = ft_time() - philo->params->start;
+    size = ft_size(philo, time) + 14;
+    if (!(msg = malloc(sizeof(char) * (size + 1))))
+        return (1);
+    tmp = msg;
+    get_number(&tmp, time);
+    get_string(&tmp, " ");
+    get_number(&tmp, philo->id);
+    get_string(&tmp, " is eating.\n");
+    *tmp++ = '\0';
+    write(1, msg, size + 1);
+    free(msg);
+    return (0);
+}
+
+int     ddie(t_philos *philo)
+{
+    size_t      time;
+    size_t      size;
+    char        *msg;
+    char        *tmp;
+
+    time = ft_time() - philo->params->start;
+    size = ft_size(philo, time) + 12;
+    if (!(msg = malloc(sizeof(char) * (size + 1))))
+        return (1);
+    tmp = msg;
+    get_number(&tmp, time);
+    get_string(&tmp, " ");
+    get_number(&tmp, philo->id);
+    get_string(&tmp, " is dead.\n");
+    *tmp++ = '\0';
+    write(1, msg, size + 1);
+    free(msg);
+    return (0);
+}
+
+int     dsleep(t_philos *philo)
+{
+    size_t      time;
+    size_t      size;
+    char        *msg;
+    char        *tmp;
+
+    time = ft_time() - philo->params->start;
+    size = ft_size(philo, time) + 16;
+    if (!(msg = malloc(sizeof(char) * (size + 1))))
+        return (1);
+    tmp = msg;
+    get_number(&tmp, time);
+    get_string(&tmp, " ");
+    get_number(&tmp, philo->id);
+    get_string(&tmp, " is sleeping.\n");
+    *tmp++ = '\0';
+    write(1, msg, size + 1);
+    free(msg);
+    return (0);
+}
+
+int     dthink(t_philos *philo)
+{
+    size_t      time;
+    size_t      size;
+    char        *msg;
+    char        *tmp;
+
+    time = ft_time() - philo->params->start;
+    size = ft_size(philo, time) + 16;
+    if (!(msg = malloc(sizeof(char) * (size + 1))))
+        return (1);
+    tmp = msg;
+    get_number(&tmp, time);
+    get_string(&tmp, " ");
+    get_number(&tmp, philo->id);
+    get_string(&tmp, " is thinking.\n");
+    *tmp++ = '\0';
+    write(1, msg, size + 1);
     free(msg);
     return (0);
 }
