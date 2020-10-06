@@ -20,7 +20,7 @@ void        *mthread(void *philo)
     }
 }
 
-void        killeveryone(t_philo_three *tmp)
+void    killeveryone(t_philo_three *tmp)
 {
     size_t  i;
 
@@ -32,7 +32,7 @@ void        killeveryone(t_philo_three *tmp)
     }
 }
 
-int         status(t_philos *philo)
+int     status(t_philos *philo)
 {
     static int  n;
     int         j;
@@ -53,7 +53,7 @@ int         status(t_philos *philo)
     return (0);
 }
 
-int         mglobal(t_philo_three *tmp)
+int     mglobal(t_philo_three *tmp)
 {
     size_t  i;
     int     j;

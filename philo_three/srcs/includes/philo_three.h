@@ -3,9 +3,8 @@
  #include <unistd.h>
  #include <pthread.h>
  #include <stdlib.h>
- #include <stdio.h>
- #include <semaphore.h>
  #include <signal.h>
+ #include <semaphore.h>
  #include <fcntl.h>
  #include <sys/time.h>
 
@@ -19,8 +18,6 @@
      size_t                 nw_eat;
      size_t                 start;
      int                    end;
-     sem_t                  *write;
-     sem_t                  *fork;
  }                          t_params;
 
  typedef struct             s_philos
@@ -31,6 +28,8 @@
      size_t                 ceat;
      size_t                 last;
      pid_t                  pid;
+     sem_t                  *write;
+     sem_t                  *fork;
      t_params               *params;     
  }                          t_philos;
 
@@ -46,16 +45,12 @@
  int                        err(char *str, int help);
  int                        msg(t_philos *philo, char *str);
  int                        thr(t_philo_three *philo_three);
- void                       aeat(t_philos *tmp);
- void                       asleep(t_philos *tmp);
- void                       athink(t_philos *tmp);
+ int                        aeat(t_philos *tmp);
  char			            *ft_itoa(size_t n);
  void                       ft_putstr(char *str);
  void                       *mthread(void *philo);
- char	                    *ft_strdup(const char *s1);
- char	                    *ft_strcpy(char *dest, const char *src);
  size_t	                    ft_strlen(const char *s);
- int                        mglobal(t_philo_three *philo_three);
+ int                        mglobal(t_philo_three *tmp);
  size_t                     ft_time(void);
  t_philo_three              *init(int argc, char **argv);
 

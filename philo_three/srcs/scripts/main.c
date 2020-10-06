@@ -39,5 +39,6 @@ int     main(int argc, char **argv)
     if ((philo_three = init(argc, argv)) == NULL)
         return (clean(philo_three) && err("A problem occured during malloc.", 0));
     thr(philo_three);
+    clean(philo_three);
     return (0);
 }
