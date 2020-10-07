@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   numbers.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: guysharony <guysharony@student.42.fr>      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/10/07 13:24:12 by guysharony        #+#    #+#             */
+/*   Updated: 2020/10/07 13:25:45 by guysharony       ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../includes/philo_one.h"
 
 int		ft_atoi(char *str)
@@ -29,30 +41,30 @@ int		ft_atoi(char *str)
 	return (d);
 }
 
-int     is_number(char *str)
+int		is_number(char *str)
 {
-    int i;
+	int i;
 
-    i = 0;
-    while (str[i])
-    {
-        if (!(str[i] >= '0' && str[i] <= '9'))
-            return (1);
-        i++;
-    }
-    return (0);
+	i = 0;
+	while (str[i])
+	{
+		if (!(str[i] >= '0' && str[i] <= '9'))
+			return (1);
+		i++;
+	}
+	return (0);
 }
 
-int     are_numbers(int nb, char **values)
+int		are_numbers(int nb, char **values)
 {
-    int i;
+	int i;
 
-    i = 1;
-    while (i < nb)
-    {
-        if (is_number(values[i]))
-            return (1);
-        i++;
-    }
-    return (0);
+	i = 1;
+	while (i < nb)
+	{
+		if (is_number(values[i]))
+			return (1);
+		i++;
+	}
+	return (0);
 }
