@@ -19,7 +19,6 @@ int		clean(t_philo_one *philo_one)
 	i = 0;
 	while (i < philo_one->params->nb_of_philosophers)
 	{
-		pthread_mutex_unlock(philo_one->params->fork[i]);
 		pthread_mutex_destroy(philo_one->params->fork[i]);
 		free(philo_one->params->fork[i]);
 		i++;
