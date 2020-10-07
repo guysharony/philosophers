@@ -6,7 +6,7 @@
 /*   By: gsharony <gsharony@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/07 15:02:01 by gsharony          #+#    #+#             */
-/*   Updated: 2020/10/07 15:51:11 by gsharony         ###   ########.fr       */
+/*   Updated: 2020/10/07 17:26:01 by gsharony         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,6 @@ void		sthr(t_philos *philo)
 int			thr(t_philo_three *tmp)
 {
 	size_t		i;
-	pthread_t	tid;
 
 	i = 0;
 	tmp->params->start = ft_time();
