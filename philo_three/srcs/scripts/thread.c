@@ -6,7 +6,7 @@
 /*   By: gsharony <gsharony@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/07 15:02:01 by gsharony          #+#    #+#             */
-/*   Updated: 2020/10/07 15:03:20 by gsharony         ###   ########.fr       */
+/*   Updated: 2020/10/07 15:51:11 by gsharony         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,13 +23,8 @@ void		sthr(t_philos *philo)
 	{
 		if (aeat(philo))
 			exit(1);
-		sem_wait(philo->write);
-		msg(philo, "is sleeping.");
-		sem_post(philo->write);
-		usleep(philo->params->tm_to_sleep * 1000);
-		sem_wait(philo->write);
-		msg(philo, "is thinking.");
-		sem_post(philo->write);
+		asleep(philo);
+		athink(philo);
 	}
 	exit(2);
 }

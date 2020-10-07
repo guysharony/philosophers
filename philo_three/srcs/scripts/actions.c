@@ -6,7 +6,7 @@
 /*   By: gsharony <gsharony@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/07 14:48:00 by gsharony          #+#    #+#             */
-/*   Updated: 2020/10/07 15:14:14 by gsharony         ###   ########.fr       */
+/*   Updated: 2020/10/07 15:52:40 by gsharony         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,4 +29,19 @@ int		aeat(t_philos *tmp)
 	sem_post(tmp->fork);
 	sem_post(tmp->fork);
 	return (tmp->stop);
+}
+
+void	asleep(t_philos *tmp)
+{
+	sem_wait(tmp->write);
+	msg(tmp, "is sleeping.");
+	sem_post(tmp->write);
+	usleep(tmp->params->tm_to_sleep * 1000);
+}
+
+void	athink(t_philos *tmp)
+{
+	sem_wait(tmp->write);
+	msg(tmp, "is thinking.");
+	sem_post(tmp->write);
 }

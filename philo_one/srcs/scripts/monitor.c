@@ -6,7 +6,7 @@
 /*   By: gsharony <gsharony@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/07 13:37:36 by gsharony          #+#    #+#             */
-/*   Updated: 2020/10/07 13:37:37 by gsharony         ###   ########.fr       */
+/*   Updated: 2020/10/07 15:48:46 by gsharony         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,6 @@ void		*mthread(void *philo)
 				tmp->params->nw_eat--;
 			return (NULL);
 		}
-		usleep(100);
 	}
 }
 

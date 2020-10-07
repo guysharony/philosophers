@@ -6,7 +6,7 @@
 /*   By: gsharony <gsharony@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/07 15:15:35 by gsharony          #+#    #+#             */
-/*   Updated: 2020/10/07 15:33:01 by gsharony         ###   ########.fr       */
+/*   Updated: 2020/10/07 15:51:41 by gsharony         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,8 @@ int							err(char *str, int help);
 int							msg(t_philos *philo, char *str);
 int							thr(t_philo_two *philo_two);
 int							aeat(t_philos *tmp);
+void						asleep(t_philos *tmp);
+void						athink(t_philos *tmp);
 char						*ft_itoa(size_t n);
 void						ft_putstr(char *str);
 void						*mthread(void *philo);
