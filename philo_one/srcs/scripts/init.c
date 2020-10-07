@@ -6,7 +6,7 @@
 /*   By: guysharony <guysharony@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/07 13:02:59 by guysharony        #+#    #+#             */
-/*   Updated: 2020/10/07 13:16:36 by guysharony       ###   ########.fr       */
+/*   Updated: 2020/10/07 13:18:56 by guysharony       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,6 @@ int				init_options(t_philo_one *tmp, int argc, char **argv)
 {
 	if (!(tmp->params = malloc(sizeof(t_params))))
 		return (1);
-	init_mutex(tmp, ft_atoi(argv[1]));
 	tmp->params->nb_of_philosophers = ft_atoi(argv[1]);
 	tmp->params->nw_eat = tmp->params->nb_of_philosophers;
 	tmp->params->tm_to_die = ft_atoi(argv[2]);
@@ -45,6 +44,7 @@ int				init_options(t_philo_one *tmp, int argc, char **argv)
 	tmp->params->nb_eat_philo = -1;
 	if (argc == 6)
 		tmp->params->nb_eat_philo = ft_atoi(argv[5]);
+	init_mutex(tmp, tmp->params->nb_of_philosophers);
 	return (0);
 }
 
