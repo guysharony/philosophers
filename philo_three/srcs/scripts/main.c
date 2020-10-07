@@ -22,7 +22,6 @@ int		clean(t_philo_three *tmp)
 		free(tmp->philo[i]);
 		i++;
 	}
-	sem_unlink("fork");
 	free(tmp->philo);
 	free(tmp->params);
 	free(tmp);
