@@ -6,7 +6,7 @@
 /*   By: gsharony <gsharony@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/07 14:56:36 by gsharony          #+#    #+#             */
-/*   Updated: 2020/10/07 15:13:57 by gsharony         ###   ########.fr       */
+/*   Updated: 2020/10/07 15:27:01 by gsharony         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ int		main(int argc, char **argv)
 	if (args(argc, argv))
 		return (1);
 	if ((philo_three = init(argc, argv)) == NULL)
-		return (clean(philo_three) && err("A problem with malloc.", 0));
+		return (clean(philo_three) && err("Problem with malloc.", 0));
 	thr(philo_three);
 	clean(philo_three);
 	return (0);
