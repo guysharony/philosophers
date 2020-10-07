@@ -6,19 +6,19 @@
 /*   By: gsharony <gsharony@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/07 14:49:12 by gsharony          #+#    #+#             */
-/*   Updated: 2020/10/07 15:11:30 by gsharony         ###   ########.fr       */
+/*   Updated: 2020/10/07 15:47:54 by gsharony         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/philo_three.h"
 
-int				init_semaphore(sem_t *fork, sem_t *write, size_t size)
+int				init_semaphore(sem_t **fork, sem_t **write, size_t size)
 {
 	sem_unlink("fork");
 	sem_unlink("write");
-	if ((fork = sem_open("fork", O_CREAT, S_IRWXU, size)) < 0)
+	if ((*fork = sem_open("fork", O_CREAT, S_IRWXU, size)) < 0)
 		return (1);
-	if ((write = sem_open("write", O_CREAT, S_IRWXU, 1)) < 0)
+	if ((*write = sem_open("write", O_CREAT, S_IRWXU, 1)) < 0)
 		return (1);
 	return (0);
 }
@@ -46,7 +46,7 @@ int				init_philos(t_philo_three *tmp, int size)
 	sem_t		*write;
 
 	i = 0;
-	init_semaphore(fork, write, size);
+	init_semaphore(&fork, &write, size);
 	if (!(tmp->philo = malloc(sizeof(t_philos*) * size)))
 		return (1);
 	while (i < size)
