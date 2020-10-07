@@ -6,7 +6,7 @@
 /*   By: gsharony <gsharony@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/07 13:37:52 by gsharony          #+#    #+#             */
-/*   Updated: 2020/10/07 13:37:53 by gsharony         ###   ########.fr       */
+/*   Updated: 2020/10/07 15:53:31 by gsharony         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,12 +16,12 @@ int			aeat(t_philos *tmp)
 {
 	pthread_mutex_lock(tmp->rfork);
 	pthread_mutex_lock(tmp->lfork);
+	tmp->eat = 1;
 	pthread_mutex_lock(tmp->params->write);
 	msg(tmp, "has taken a fork.");
 	msg(tmp, "has taken a fork.");
 	msg(tmp, "is eating.");
 	pthread_mutex_unlock(tmp->params->write);
-	tmp->eat = 1;
 	tmp->ceat++;
 	tmp->last = ft_time();
 	usleep(tmp->params->tm_to_eat * 1000);
