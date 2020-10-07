@@ -6,7 +6,7 @@
 /*   By: gsharony <gsharony@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/07 14:57:58 by gsharony          #+#    #+#             */
-/*   Updated: 2020/10/07 16:10:32 by gsharony         ###   ########.fr       */
+/*   Updated: 2020/10/07 16:11:56 by gsharony         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,10 +23,10 @@ void	*mthread(void *philo)
 		time = ft_time();
 		if ((tmp->params->nb_eat_philo > 0 &&
 		tmp->ceat >= tmp->params->nb_eat_philo) ||
-		(!tmp->eat && tmp->last + tmp->params->tm_to_die < time))
+		(!tmp->eat && tmp->last + tmp->params->tm_to_die <= time))
 		{
 			tmp->stop = 1;
-			if (tmp->last + tmp->params->tm_to_die < time)
+			if (tmp->last + tmp->params->tm_to_die <= time)
 				exit(2);
 			return (NULL);
 		}

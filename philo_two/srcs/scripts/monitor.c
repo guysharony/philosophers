@@ -6,7 +6,7 @@
 /*   By: gsharony <gsharony@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/07 15:22:08 by gsharony          #+#    #+#             */
-/*   Updated: 2020/10/07 16:10:18 by gsharony         ###   ########.fr       */
+/*   Updated: 2020/10/07 16:12:12 by gsharony         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,12 +21,12 @@ void		*mthread(void *philo)
 	while (1)
 	{
 		time = ft_time();
-		if ((!tmp->eat && tmp->last + tmp->params->tm_to_die < time) ||
+		if ((!tmp->eat && tmp->last + tmp->params->tm_to_die <= time) ||
 		(tmp->params->nb_eat_philo > 0 &&
 		tmp->ceat >= tmp->params->nb_eat_philo))
 		{
 			tmp->stop = 1;
-			if (tmp->last + tmp->params->tm_to_die < time)
+			if (tmp->last + tmp->params->tm_to_die <= time)
 			{
 				sem_wait(tmp->write);
 				msg(tmp, "is dead.");
