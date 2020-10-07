@@ -23,6 +23,13 @@ int		clean(t_philo_one *philo_one)
 		free(philo_one->params->fork[i]);
 		i++;
 	}
+	i = 0;
+	while (i < philo_one->params->nb_of_philosophers)
+	{
+		free(philo_one->philo[i]);
+		i++;
+	}
+	free(philo_one->params->write);
 	free(philo_one->params->fork);
 	free(philo_one->philo);
 	free(philo_one->params);
