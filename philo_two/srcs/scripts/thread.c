@@ -6,7 +6,7 @@
 /*   By: gsharony <gsharony@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/07 15:22:23 by gsharony          #+#    #+#             */
-/*   Updated: 2020/10/07 15:51:58 by gsharony         ###   ########.fr       */
+/*   Updated: 2020/10/07 16:09:18 by gsharony         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,7 @@ int			thr(t_philo_two *tmp)
 		if (pthread_create(&tid, NULL, &sthr, tmp->philo[i]))
 			return (err("A problem with pthread_create() in \'thread.c\'.", 0));
 		pthread_detach(tid);
+		usleep(1000);
 		i++;
 	}
 	mglobal(tmp);
