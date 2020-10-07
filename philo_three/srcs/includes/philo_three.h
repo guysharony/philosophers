@@ -6,7 +6,7 @@
 /*   By: gsharony <gsharony@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/07 14:47:52 by gsharony          #+#    #+#             */
-/*   Updated: 2020/10/07 15:51:07 by gsharony         ###   ########.fr       */
+/*   Updated: 2020/10/07 16:16:32 by gsharony         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 # include <semaphore.h>
 # include <fcntl.h>
 # include <sys/time.h>
+# include <sys/wait.h>
 
 typedef struct				s_params
 {
