@@ -6,7 +6,7 @@
 /*   By: gsharony <gsharony@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/07 15:02:01 by gsharony          #+#    #+#             */
-/*   Updated: 2020/10/07 17:26:01 by gsharony         ###   ########.fr       */
+/*   Updated: 2020/10/08 08:39:35 by gsharony         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,7 @@ int			thr(t_philo_three *tmp)
 		tmp->philo[i]->pid = fork();
 		if (!tmp->philo[i]->pid)
 			sthr(tmp->philo[i]);
+		usleep(1000);
 		i++;
 	}
 	mglobal(tmp);
