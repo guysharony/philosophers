@@ -6,7 +6,7 @@
 /*   By: gsharony <gsharony@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/07 15:01:09 by gsharony          #+#    #+#             */
-/*   Updated: 2020/10/07 15:01:53 by gsharony         ###   ########.fr       */
+/*   Updated: 2020/10/08 09:07:21 by gsharony         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ int		err(char *str, int help)
 {
 	if (help >= 0 && help < 2)
 	{
-		ft_putstr("philo_one: ");
+		ft_putstr("philo_three: ");
 		ft_putstr(str);
 		write(1, "\n", 2);
 		if (help)

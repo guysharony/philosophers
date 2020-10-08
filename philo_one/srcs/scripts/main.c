@@ -6,7 +6,7 @@
 /*   By: gsharony <gsharony@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/07 13:37:42 by gsharony          #+#    #+#             */
-/*   Updated: 2020/10/07 13:37:43 by gsharony         ###   ########.fr       */
+/*   Updated: 2020/10/08 09:07:53 by gsharony         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,11 @@ int		args(int argc, char **argv)
 		return (err("Arguments must be positive numbers.", 0));
 	if (ft_atoi(argv[1]) < 2)
 		return (err("At least 2 philosophers are requered.", 0));
+	if (argc == 6)
+	{
+		if (ft_atoi(argv[5]) < 1)
+			return (err("Philosophers can't eat 0 times.", 0));
+	}
 	return (0);
 }
 
