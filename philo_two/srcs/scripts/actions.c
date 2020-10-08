@@ -6,7 +6,7 @@
 /*   By: gsharony <gsharony@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/07 15:21:52 by gsharony          #+#    #+#             */
-/*   Updated: 2020/10/07 15:52:42 by gsharony         ###   ########.fr       */
+/*   Updated: 2020/10/08 09:11:37 by gsharony         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,9 @@ int		aeat(t_philos *tmp)
 	sem_wait(tmp->fork);
 	tmp->eat = 1;
 	sem_wait(tmp->write);
-	msg(tmp, "has taken a fork.");
-	msg(tmp, "has taken a fork.");
-	msg(tmp, "is eating.");
+	msg(tmp, "has taken a fork");
+	msg(tmp, "has taken a fork");
+	msg(tmp, "is eating");
 	sem_post(tmp->write);
 	tmp->ceat++;
 	tmp->last = ft_time();
@@ -34,7 +34,7 @@ int		aeat(t_philos *tmp)
 void	asleep(t_philos *tmp)
 {
 	sem_wait(tmp->write);
-	msg(tmp, "is sleeping.");
+	msg(tmp, "is sleeping");
 	sem_post(tmp->write);
 	usleep(tmp->params->tm_to_sleep * 1000);
 }
@@ -42,6 +42,6 @@ void	asleep(t_philos *tmp)
 void	athink(t_philos *tmp)
 {
 	sem_wait(tmp->write);
-	msg(tmp, "is thinking.");
+	msg(tmp, "is thinking");
 	sem_post(tmp->write);
 }

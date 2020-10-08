@@ -6,7 +6,7 @@
 /*   By: gsharony <gsharony@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/07 14:57:58 by gsharony          #+#    #+#             */
-/*   Updated: 2020/10/07 16:11:56 by gsharony         ###   ########.fr       */
+/*   Updated: 2020/10/08 09:11:20 by gsharony         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,7 @@ int		mglobal(t_philo_three *tmp)
 		{
 			if (j == 1)
 				return (1);
-			msg(tmp->philo[i], "is dead.");
+			msg(tmp->philo[i], "died");
 			killeveryone(tmp);
 			return (2);
 		}
