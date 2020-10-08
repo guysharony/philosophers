@@ -6,7 +6,7 @@
 /*   By: gsharony <gsharony@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/07 15:22:03 by gsharony          #+#    #+#             */
-/*   Updated: 2020/10/08 09:21:42 by gsharony         ###   ########.fr       */
+/*   Updated: 2020/10/08 09:28:32 by gsharony         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,6 @@ int		clean(t_philo_two *tmp)
 	size_t	i;
 
 	i = 0;
-	sem_close(tmp->philo[0]->fork);
-	sem_close(tmp->philo[0]->write);
 	while (i < tmp->params->nb_of_philosophers)
 	{
 		free(tmp->philo[i]);
