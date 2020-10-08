@@ -6,7 +6,7 @@
 /*   By: gsharony <gsharony@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/07 13:37:52 by gsharony          #+#    #+#             */
-/*   Updated: 2020/10/07 15:53:31 by gsharony         ###   ########.fr       */
+/*   Updated: 2020/10/08 09:10:16 by gsharony         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,9 @@ int			aeat(t_philos *tmp)
 	pthread_mutex_lock(tmp->lfork);
 	tmp->eat = 1;
 	pthread_mutex_lock(tmp->params->write);
-	msg(tmp, "has taken a fork.");
-	msg(tmp, "has taken a fork.");
-	msg(tmp, "is eating.");
+	msg(tmp, "has taken a fork");
+	msg(tmp, "has taken a fork");
+	msg(tmp, "is eating");
 	pthread_mutex_unlock(tmp->params->write);
 	tmp->ceat++;
 	tmp->last = ft_time();
@@ -34,7 +34,7 @@ int			aeat(t_philos *tmp)
 void		asleep(t_philos *tmp)
 {
 	pthread_mutex_lock(tmp->params->write);
-	msg(tmp, "is sleeping.");
+	msg(tmp, "is sleeping");
 	pthread_mutex_unlock(tmp->params->write);
 	usleep(tmp->params->tm_to_sleep * 1000);
 }
@@ -42,6 +42,6 @@ void		asleep(t_philos *tmp)
 void		athink(t_philos *tmp)
 {
 	pthread_mutex_lock(tmp->params->write);
-	msg(tmp, "is thinking.");
+	msg(tmp, "is thinking");
 	pthread_mutex_unlock(tmp->params->write);
 }
